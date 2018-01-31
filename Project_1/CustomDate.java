@@ -267,7 +267,7 @@ public class CustomDate {
 	}
 	
 	public int compareTo(Object o1) {
-		if(o1 == null) {
+		if(o1 == null || !(o1 instanceof CustomDate)) {
 			throw new NullPointerException("\nThe passed object is null!");
 		}
 		else if (this == (CustomDate) o1) {

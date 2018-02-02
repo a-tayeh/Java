@@ -17,6 +17,7 @@ public class CustomDate {
 		this.month = 1;
 		this.day = 1;
 		this.year = 2000;
+
 	}
 
 	/**
@@ -158,7 +159,10 @@ public class CustomDate {
 	}
 	
 	public boolean isLeapYear() {
-		if(this.year % 100 != 0 && this.year % 4 ==0) {
+		if(this.year % 100 != 0 && this.year % 4 ==0 ) {
+			return true;
+		}
+		else if(this.year % 100 == 0 && this.year % 400 == 0 ){
 			return true;
 		}
 		return false;
@@ -211,7 +215,7 @@ public class CustomDate {
 				day = day + 7;
 				 if(day > 31) {
 					month++;
-					day = 1;
+					day = day - 31;
 				}
 				 break;
 			 
@@ -219,25 +223,27 @@ public class CustomDate {
 				day = day + 7;
 				if(day > 30) {
 					month++;
-					day = 1;
+                    day = day - 30;
 				}
 				break;
+
 			case 12:
 				day = day + 7;
 				if(day > 31) {
-					day = 1;
+					day = day - 31;
 					month = 1;
 					year++;
 				}
 				break;
+
 			case 2:
 				day = day + 7;
 				if(isLeapYear() && day > 29) {
-					day = 1;
+                    day = day - 29;
 					month++;
 				}
 				else if( (!(isLeapYear()) && day > 28)) {
-					day = 1;
+                    day = day - 28;
 					month++;
 				}
 				break;
@@ -308,8 +314,7 @@ public class CustomDate {
 			 break;}
 		
 		switch(day) {
-		case 1: case 2: case 3: case 4: case 5:
-		case 6: case 7: case 8: case 9:
+		case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
 			 dayZero = "0";
 			 break;}
 		

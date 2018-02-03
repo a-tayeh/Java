@@ -1,18 +1,26 @@
 /**
- * 
- */
-
-/**
  * @author alitayeh
+ *
+ *                                                  Ali Tayeh           CMSC256
+ *
+ *
+ *  Poject_1:CustomDate
+ *
+ *  This project will take a CustomDate object with dates then determine if the date is valid and perform some operations
+ *  on that date such as , setting/getting the date fields(month,day,year), advancing the date by one day/week and determining
+ *  whether the year passed is a leap year or not!
+ *  Some methods such as equals and toString are overriden to ensure appropriate output.
+ *
  *
  */
 public class CustomDate {
 
-
+    // declaring our private fields month/day/year of type int
 	private int month;
 	private int day;
 	private int year;
-	
+
+	// default constructor
 	public CustomDate() {
 		this.month = 1;
 		this.day = 1;
@@ -21,6 +29,7 @@ public class CustomDate {
 	}
 
 	/**
+     * Our parameterized constructor using
 	 * @param day
 	 * @param month
 	 * @param year
@@ -31,7 +40,7 @@ public class CustomDate {
 		this.day = day;
 		this.month = month;
 		this.year = year;
-	
+
 		if(!(isValidDate())) {
 			throw new IllegalArgumentException("Invalid Date ---> " + toString());
 			
@@ -44,7 +53,7 @@ public class CustomDate {
 		}
 		else if(isValidDate() && !(isLeapYear()) ) {
 			if(this.month == 2 && this.day >28) {
-				throw new IllegalArgumentException("February cannot exceed 28 days because "+ this.year +" is NOT leap year");
+				throw new IllegalArgumentException("February cannot exceed 28 days because "+ this.year +" is NOT a leap year");
 			 	}
 			}
 			
@@ -60,7 +69,7 @@ public class CustomDate {
 	}
 
 	/**
-	 * @param day the day to set
+	 * @param day,  the day to be set
 	 */
 	public void setDay(int day) {
 			
@@ -80,7 +89,7 @@ public class CustomDate {
 	}
 
 	/**
-	 * @param month the month to set
+	 * @param month,  the month to be set
 	 */
 	public void setMonth(int month) {
 
@@ -170,6 +179,9 @@ public class CustomDate {
 	
 	
 	public void advanceOneDay() {
+		// switch statement that checks if month is 1,3,5,7,8,10 since these are the months with 31 days
+		// and it has an if statement in case we go over 31 when we advance one day, if so, then increment month,
+		// then set day = 1
 		switch(month) {
 		case 1: case 3: case 5: case 7: case 8: case 10:
 			day = day+1;
@@ -178,7 +190,8 @@ public class CustomDate {
 				day = 1;
 			 }
 			 break;
-			 
+
+		// switch statement that checks if month is 4,6,9,11 since these are the months with 30 days
 		case 4: case 6: case 9: case 11:
 			day = day+1;
 			if(day > 30) {
@@ -186,6 +199,8 @@ public class CustomDate {
 				day = 1;
 			}
 			break;
+
+		// december is a special case, because we have to increment the year as well if we go beyond 31 days.
 		case 12:
 			day = day + 1;
 			if(day > 31) {
@@ -194,6 +209,8 @@ public class CustomDate {
 				year++;
 			}
 			break;
+			
+		// february is 29 or 28 days depending on the fact if it's a leap year or not
 		case 2:
 			day = day+1;
 			if(isLeapYear() && day > 29) {
@@ -209,7 +226,9 @@ public class CustomDate {
 		
 	}
 	public void advanceOneWeek() {
-		
+		// switch statement that checks if month is 1,3,5,7,8,10 since these are the months with 31 days
+		// and it has an if statement in case we go over 31 when we advance on week, if so, then increment month,
+        // the set day to be the difference b/w day - 31 days after it has done the day += 7
 		switch(month) {
 			case 1: case 3: case 5: case 7: case 8: case 10:
 				day = day + 7;
@@ -218,7 +237,7 @@ public class CustomDate {
 					day = day - 31;
 				}
 				 break;
-			 
+			// switch statement that checks if month is 4,6,9,11 since these are the months with 30 days
 			case 4: case 6: case 9: case 11:
 				day = day + 7;
 				if(day > 30) {
@@ -226,7 +245,7 @@ public class CustomDate {
                     day = day - 30;
 				}
 				break;
-
+			// december is a special case, because we have to increment the year as well if we go beyond 31 days.
 			case 12:
 				day = day + 7;
 				if(day > 31) {
@@ -236,6 +255,8 @@ public class CustomDate {
 				}
 				break;
 
+			// february is 29 or 28 days depending on the fact if it's a leap year or not
+            //
 			case 2:
 				day = day + 7;
 				if(isLeapYear() && day > 29) {
@@ -250,7 +271,7 @@ public class CustomDate {
 		}
 		
 	}
-	
+	@Override
 	public boolean equals(Object obj) {
 		if(obj == null) {
 			return false;
@@ -270,36 +291,43 @@ public class CustomDate {
 		return false;
 	}
 
-	
-	public int compareTo(Object o1) {
-		
-		if(o1 == null) {
+
+	public int compareTo(Object obj) {
+		// if the object is null then a NullPointerException will be thrown
+		if(obj == null) {
 			throw new NullPointerException("\nThe passed object is null!");
 		}
-		else if(!(o1 instanceof CustomDate)){
+        // if the object is not an instance of CustomDate class then an IllegalArgumentException will be thrown
+		else if(!(obj instanceof CustomDate)){
 			throw new IllegalArgumentException("Only objects of type CustomDate can be compared!");
 		}
-		if (toString().compareTo(o1.toString()) == 0) {
+
+		// if the this object is equal to the o1 object
+		if (this.equals((CustomDate)obj)) {
 			return 0;
 		}
-		else if(toString().compareTo(o1.toString()) < 0) {
-			return -1;
-		}
-		else if(toString().compareTo(o1.toString()) > 0) {
-			return 1;
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        else if(this.year < ((CustomDate) obj).getYear()) {return -1;}
+
+        else if(this.year > ((CustomDate) obj).getYear()) {return 1;}
+
+	    else if(this.year == ((CustomDate) obj).getYear()){
+
+                if(this.month < ((CustomDate) obj).getMonth()) {return -1;}
+                else if(this.month > ((CustomDate) obj).getMonth()) {return 1;}
+
+                else if(this.month == ((CustomDate) obj).getMonth()){
+
+                    if(this.day < ((CustomDate) obj).getDay()) {return -1;}
+                    else if(this.day > ((CustomDate) obj).getDay()) {return 1;}
+                }
+        }
+
+
 		return 2;
 	}
-	
+
+
+    @Override
 	public String toString() {
 		// These will hold our number of zeroes depending on our month/day/year value
 		String monthZero = "";

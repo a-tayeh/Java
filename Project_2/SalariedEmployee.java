@@ -2,7 +2,6 @@ public class SalariedEmployee extends Employee {
 
     public SalariedEmployee(String first, String last, double annualSalary) {
         super(first, last, annualSalary);
-        annualSalary = 40 *52;
 
     }
 

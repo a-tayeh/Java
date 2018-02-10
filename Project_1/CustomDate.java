@@ -271,12 +271,9 @@ public class CustomDate {
 
 
 	public int compareTo(Object obj) {
-		// if the object is null then a NullPointerException will be thrown
-		if(obj == null) {
-			throw new NullPointerException("\nThe passed object is null!");
-		}
-        // if the object is not an instance of CustomDate class then an IllegalArgumentException will be thrown
-		else if(!(obj instanceof CustomDate)){
+	
+        // if the object is not an instance of CustomDate class/or null then an IllegalArgumentException will be thrown
+		 if(!(obj instanceof CustomDate) || obj == null){
 			throw new IllegalArgumentException("Only objects of type CustomDate can be compared!");
 		}
 

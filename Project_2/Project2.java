@@ -33,6 +33,7 @@ public class Project2 {
 
             }
             fromFile.close();
+
             obj.print();
 
         }catch (Exception e){

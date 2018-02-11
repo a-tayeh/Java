@@ -59,7 +59,7 @@ public class PersonnelManager {
     }
     public void print(){
         for(int i =0;i<numOfEntries;i++){
-            System.out.println(data[i].getFirstName() + " " + data[i].getLastName());
+            System.out.println(data[i].getFirstName() + " " + data[i].getLastName()+ " "+ data[i].getWage());
         }
 
     }

@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class SalariedEmployee extends Employee {
 
     public SalariedEmployee(String first, String last, double annualSalary) {
@@ -12,7 +14,8 @@ public class SalariedEmployee extends Employee {
 
     @Override
     public double getWage() {
-        return getWage();
+        String strDouble = String.format("%.2f", super.getWage()/2080);
+        return Double.parseDouble(strDouble);
     }
 
     @Override

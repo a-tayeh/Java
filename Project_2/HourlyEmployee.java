@@ -17,6 +17,11 @@ public class HourlyEmployee extends Employee {
     }
 
     @Override
+    public double getWage() {
+        return super.getWage();
+    }
+
+    @Override
     public String toString() {
         return super.toString();
 

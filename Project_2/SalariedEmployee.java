@@ -14,8 +14,7 @@ public class SalariedEmployee extends Employee {
 
     @Override
     public double getWage() {
-        String strDouble = String.format("%.2f", super.getWage()/2080);
-        return Double.parseDouble(strDouble);
+        return super.getWage();
     }
 
     @Override

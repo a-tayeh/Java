@@ -7,6 +7,7 @@ public class Project2 {
         String lName = "";
         double hourly = 0.0;
         String rate = "";
+        String strDouble = "";
 
         try {
             PersonnelManager obj = new PersonnelManager();
@@ -25,6 +26,8 @@ public class Project2 {
                         obj.addHourlyEmployee(new HourlyEmployee(fName,lName,hourly));
                     }
                     else if(rate.equalsIgnoreCase("s")){
+                        strDouble = String.format("%.2f", (hourly/2080));
+                        hourly = Double.parseDouble(strDouble);
                         obj.addSalariedEmployee(new SalariedEmployee(fName,lName,hourly));
                     }
                     arr = new String[4];

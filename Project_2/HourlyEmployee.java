@@ -18,7 +18,8 @@ public class HourlyEmployee extends Employee {
 
     @Override
     public double getWage() {
-        return super.getWage();
+        String strDouble = String.format("%.2f", super.getWage());
+        return Double.parseDouble(strDouble);
     }
 
     @Override

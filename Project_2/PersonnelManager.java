@@ -59,9 +59,36 @@ public class PersonnelManager {
     }
     public void print(){
         for(int i =0;i<numOfEntries;i++){
-            System.out.println(data[i].getFirstName() + " " + data[i].getLastName()+ " "+ data[i].getWage());
+            if(data[i]!=null) {
+                System.out.println(data[i].getFirstName() + " " + data[i].getLastName() + " " + data[i].getWage());
+            }
         }
+        System.out.println(getNumOfEntries());
+    }
 
+    private int getIndex(Employee t){
+        for(int i = 0;i<data.length;i++){
+            if(data[i].equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public String deleteEmployee(String name){
+        for(Employee a: data){
+            if(a.getLastName().equalsIgnoreCase(name)){
+                String k = a.getName();
+                Employee temp = a;
+                data[getIndex(a)] = data[data.length-1];
+                data[data.length-1] = null;
+
+                numOfEntries--;
+                return String.format("\tEmployee: "+k+", has been deleted!");
+
+
+            }
+        }
+        return "";
     }
     @Override
     public String toString() {

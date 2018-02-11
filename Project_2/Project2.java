@@ -1,18 +1,28 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 public class Project2 {
     public static void main(String[] args){
         String [] arr = new String[4];
+        String [] arr2 = new String[4];
         String fName = "";
         String lName = "";
         double hourly = 0.0;
         String rate = "";
         String strDouble = "";
+        String symbol = "";
+        boolean done = true;
+
 
         try {
             PersonnelManager obj = new PersonnelManager();
 
-            Scanner fromFile = new Scanner(new File("EmployeesIn.dat"));
+            File n = new File("EmployeesIn.dat");
+            Scanner fromFile = new Scanner(n);
+            if(n.length()==0){
+
+                throw new IOException("file is empty?");
+            }
             while(fromFile.hasNextLine() && arr.length<5){
                 arr = fromFile.nextLine().split("\\s+");
                 if(arr.length == 4){
@@ -26,8 +36,8 @@ public class Project2 {
                         obj.addHourlyEmployee(new HourlyEmployee(fName,lName,hourly));
                     }
                     else if(rate.equalsIgnoreCase("s")){
-                        strDouble = String.format("%.2f", (hourly/2080));
-                        hourly = Double.parseDouble(strDouble);
+//                        strDouble = String.format("%.2f", (hourly/2080));
+//                        hourly = Double.parseDouble(strDouble);
                         obj.addSalariedEmployee(new SalariedEmployee(fName,lName,hourly));
                     }
                     arr = new String[4];
@@ -36,6 +46,19 @@ public class Project2 {
 
             }
             fromFile.close();
+            Scanner fromFile2 = new Scanner(new File("Updates.dat"));
+            while (fromFile2.hasNextLine()){
+                arr2 = fromFile2.nextLine().split("\\s+");
+                symbol = arr2[0];
+                if(symbol.equalsIgnoreCase("d")){
+
+                    System.out.println(obj.deleteEmployee(arr2[1]));
+                }
+
+
+            }
+
+            fromFile2.close();
 
             obj.print();
 

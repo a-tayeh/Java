@@ -12,6 +12,7 @@ public class Project2 {
         String strDouble = "";
         String symbol = "";
         boolean done = false;
+        String inCase = "";
 
 
         try {
@@ -47,15 +48,40 @@ public class Project2 {
             }
             fromFile.close();
             Scanner fromFile2 = new Scanner(new File("Updates.dat"));
-            while (fromFile2.hasNextLine()){
-                arr2 = fromFile2.nextLine().split("\\s+");
+            while(fromFile2.hasNextLine()){
+                inCase = fromFile2.nextLine();
+
+                arr2 = inCase.split("\\s+");
                 symbol = arr2[0];
-                if(symbol.equalsIgnoreCase("d")){
-                    obj.deleteEmployee(arr2[1]);
+                if(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r") || symbol.equalsIgnoreCase("d")){
+                        if(symbol.equalsIgnoreCase("d")){
+                            System.out.println("Deleted employee:"+arr2[1]);
+                            obj.deleteEmployee(arr2[1]);
+                        }
+                        else if(symbol.equalsIgnoreCase("r")){
+                            obj.raiseWage(Double.parseDouble(arr2[1]));
+                        }
+                        else if(symbol.equalsIgnoreCase("n") && arr2[3].equalsIgnoreCase("s")){
+                            lName = arr2[1].replace(",", "");
+                            fName = arr2[2];
+                            hourly = Double.parseDouble(arr2[4]);
+                            obj.addSalariedEmployee(new SalariedEmployee(fName,lName,hourly));
+                            System.out.println("New Employee: "+ fName+", "+lName);
+                        }
+                        else if(symbol.equalsIgnoreCase("n") && arr2[3].equalsIgnoreCase("h")){
+                            lName = arr2[1].replace(",", "");
+                            fName = arr2[2];
+                            hourly = Double.parseDouble(arr2[4]);
+                            obj.addHourlyEmployee(new HourlyEmployee(fName,lName,hourly));
+                            System.out.println("New Employee: "+ fName+", "+lName);
+                        }
+//                        continue;
                 }
-                else if(symbol.equalsIgnoreCase("r")){
-                    obj.raiseWage(Double.parseDouble(arr2[1]));
+                else if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r") || symbol.equalsIgnoreCase("d"))){
+                    System.out.println("<Command not recognized on line:>\t"+inCase);
                 }
+
+
 
 
             }

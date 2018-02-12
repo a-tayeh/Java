@@ -102,7 +102,7 @@ public class PersonnelManager {
             a.raiseWages(raise);
 
         }
-        System.out.println("Wages have be raised by: "+raise+"%");
+        System.out.println("Wages have been raised by: "+raise+"%");
     }
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ public class Project2 {
         String rate = "";
         String strDouble = "";
         String symbol = "";
-        boolean done = true;
+        boolean done = false;
 
 
         try {
@@ -28,8 +28,8 @@ public class Project2 {
                 if(arr.length == 4){
                     arr[0] = arr[0].replace(",", "");
 
-                    fName = arr[0];
-                    lName = arr[1];
+                    lName = arr[0];
+                    fName = arr[1];
                     rate = arr[2];
                     hourly = Double.parseDouble(arr[3]);
                     if(rate.equalsIgnoreCase("h")){
@@ -51,8 +51,9 @@ public class Project2 {
                 arr2 = fromFile2.nextLine().split("\\s+");
                 symbol = arr2[0];
                 if(symbol.equalsIgnoreCase("d")){
+                    obj.deleteEmployee(arr2[1]);
 
-                    System.out.println(obj.deleteEmployee(arr2[1]));
+
                 }
 
 
@@ -61,10 +62,12 @@ public class Project2 {
             fromFile2.close();
 
             obj.print();
+            //System.out.println(obj.getNumOfEntries());
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+
 
     }
 }

@@ -13,7 +13,7 @@ public class HourlyEmployee extends Employee {
         else if(hours>40){
             return hours * (1.5 * getWage());
         }
-        return 0;
+        return 0.0;
     }
 
     @Override
@@ -24,7 +24,9 @@ public class HourlyEmployee extends Employee {
 
     @Override
     public String toString() {
-        return super.toString();
+        String strDouble = String.format("%.2f", super.getWage());
+
+        return String.format("%s      $ %.2f/hour",super.getName(), super.getWage());
 
     }
 

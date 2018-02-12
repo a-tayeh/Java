@@ -23,4 +23,10 @@ public class SalariedEmployee extends Employee {
 
         setWage(wage);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s      $%.2f/year",super.getName(), super.getWage());
+
+    }
 }

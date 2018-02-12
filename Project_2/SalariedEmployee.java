@@ -9,7 +9,8 @@ public class SalariedEmployee extends Employee {
 
     @Override
     public double computePay(double hours) {
-        return 0;
+        String strDouble = String.format("%.2f", super.getWage()*(1/52));
+        return Double.parseDouble(strDouble);
     }
 
     @Override

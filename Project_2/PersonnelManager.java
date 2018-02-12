@@ -96,6 +96,14 @@ public class PersonnelManager {
         }
         return false;
     }
+    public void raiseWage(double raise){
+        for(Employee a: data){
+
+            a.raiseWages(raise);
+
+        }
+        System.out.println("Wages have be raised by: "+raise+"%");
+    }
     @Override
     public String toString() {
 

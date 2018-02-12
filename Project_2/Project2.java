@@ -52,8 +52,9 @@ public class Project2 {
                 symbol = arr2[0];
                 if(symbol.equalsIgnoreCase("d")){
                     obj.deleteEmployee(arr2[1]);
-
-
+                }
+                else if(symbol.equalsIgnoreCase("r")){
+                    obj.raiseWage(Double.parseDouble(arr2[1]));
                 }
 
 

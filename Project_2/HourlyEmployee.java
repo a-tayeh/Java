@@ -26,7 +26,7 @@ public class HourlyEmployee extends Employee {
     public String toString() {
         String strDouble = String.format("%.2f", super.getWage());
 
-        return String.format("%s      $ %.2f/hour",super.getName(), super.getWage());
+        return String.format("%s      $%.2f/hour",super.getName(), super.getWage());
 
     }
 

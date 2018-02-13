@@ -80,7 +80,6 @@ public class PersonnelManager {
         for(int i = 0;i < data.length && !delete;i++){
 
             if(data[i].getLastName().equalsIgnoreCase(name)){
-                    Employee temp = data[i];
                     data[i] = data[data.length-1];
                     data[data.length-1] = null;
                     numOfEntries = numOfEntries-1;

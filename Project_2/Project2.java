@@ -1,4 +1,12 @@
+/**
+ *  Ali Tayeh                   CMSC-256-001                Project2
+ *
+ *  This class has a main method that handles our reading and parsing data from a file then passing it to the
+ *  appropriate objects
+ */
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 public class Project2 {
@@ -13,15 +21,12 @@ public class Project2 {
         String symbol = "";
         boolean done = false;
         String inCase = "";
-
-
+        PersonnelManager obj = new PersonnelManager();
         try {
-            PersonnelManager obj = new PersonnelManager();
 
             File n = new File("EmployeesIn.dat");
             Scanner fromFile = new Scanner(n);
             if(n.length()==0){
-
                 throw new IOException("file is empty?");
             }
             while(fromFile.hasNextLine() && arr.length<5){
@@ -37,8 +42,6 @@ public class Project2 {
                         obj.addHourlyEmployee(new HourlyEmployee(fName,lName,hourly));
                     }
                     else if(rate.equalsIgnoreCase("s")){
-//                        strDouble = String.format("%.2f", (hourly/2080));
-//                        hourly = Double.parseDouble(strDouble);
                         obj.addSalariedEmployee(new SalariedEmployee(fName,lName,hourly));
                     }
                     arr = new String[4];
@@ -48,52 +51,65 @@ public class Project2 {
             }
             fromFile.close();
             Scanner fromFile2 = new Scanner(new File("Updates.dat"));
-            while(fromFile2.hasNextLine()){
+            while(fromFile2.hasNextLine()) {
                 inCase = fromFile2.nextLine();
-
                 arr2 = inCase.split("\\s+");
-                symbol = arr2[0];
-                if(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r") || symbol.equalsIgnoreCase("d")){
-                        if(symbol.equalsIgnoreCase("d")){
-                            System.out.println("Deleted employee:"+arr2[1]);
-                            obj.deleteEmployee(arr2[1]);
-                        }
-                        else if(symbol.equalsIgnoreCase("r")){
-                            obj.raiseWage(Double.parseDouble(arr2[1]));
-                        }
-                        else if(symbol.equalsIgnoreCase("n") && arr2[3].equalsIgnoreCase("s")){
+                symbol = arr2[0].toLowerCase();
+                switch (symbol) {
+                    case "n":
+                        if (arr2[3].equalsIgnoreCase("s")) {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
                             hourly = Double.parseDouble(arr2[4]);
-                            obj.addSalariedEmployee(new SalariedEmployee(fName,lName,hourly));
-                            System.out.println("New Employee: "+ fName+", "+lName);
+                            System.out.println("New Employee: " + fName + ", " + lName);
+                            obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                         }
-                        else if(symbol.equalsIgnoreCase("n") && arr2[3].equalsIgnoreCase("h")){
+                        else if (arr2[3].equalsIgnoreCase("h")) {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
                             hourly = Double.parseDouble(arr2[4]);
-                            obj.addHourlyEmployee(new HourlyEmployee(fName,lName,hourly));
-                            System.out.println("New Employee: "+ fName+", "+lName);
+                            System.out.println("New Employee: " + fName + " " + lName);
+                            obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
                         }
-//                        continue;
+                        break;
+                    case "d":
+                        System.out.println("Deleted employee: " + arr2[1]);
+                        obj.deleteEmployee(arr2[1]);
+                        break;
+                    case "r":
+                        System.out.println("Wages have been raised by: " + arr2[1] + "%");
+                        obj.raiseWage(Double.parseDouble(arr2[1]));
+                        break;
                 }
-                else if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r") || symbol.equalsIgnoreCase("d"))){
-                    System.out.println("<Command not recognized on line:>\t"+inCase);
+
+                if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
+                        || symbol.equalsIgnoreCase("d"))){
+
+                                System.out.println("<Command not recognized on line:>\t"+inCase);
                 }
-
-
-
-
             }
 
             fromFile2.close();
 
-            obj.print();
-            //System.out.println(obj.getNumOfEntries());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        try {
+            FileWriter writeOut = new FileWriter("EmployeesOut.dat");
+
+            for(Employee e: obj.getArray()){
+                if(e!=null) {
+                    writeOut.write(e.toString() + "\n");
+                    writeOut.flush();
+                }
+            }
+            writeOut.close();
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+        obj.print();
+        System.out.println(obj.getNumOfEntries());
 
 
     }

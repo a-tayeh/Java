@@ -61,40 +61,40 @@ public class PersonnelManager {
             newArr[i] = data[i];
         }
         data = newArr;
-
     }
-    public void print(){
-        for(int i =0;i<=numOfEntries;i++){
-            if(data[i]!=null) {
-                System.out.println(data[i].toString());
-            }
-        }
-        System.out.println(getNumOfEntries());
+
+    public Employee[] getArray(){
+        return data;
     }
 
     private int getIndex(Employee t){
-        for(int i = 0;i<numOfEntries;i++){
+        for(int i = 0;i<=numOfEntries;i++){
             if(data[i].equals(t)){
                 return i;
             }
         }
         return -1;
     }
-    public boolean deleteEmployee(String name){
+    public void deleteEmployee(String name){
+        boolean delete = false;
+        for(int i = 0;i < data.length && !delete;i++){
 
-        for(Employee a: data){
-            if(a.getLastName().equalsIgnoreCase(name)){
-//                System.out.println("ali");
-                    String k = a.getName();
-                    Employee temp = a;
-                    data[getIndex(a)] = data[data.length-1];
-                    data[data.length-1] = null;
-                    numOfEntries--;
-                    return true;
+            if(data[i].getLastName().equalsIgnoreCase(name)){
+
+                    data[i] = null;
+                    numOfEntries = numOfEntries-1;
+                    delete = true;
+
             }
-
         }
-        return false;
+    }
+    public void print(){
+        for(int i =0;i<data.length;i++){
+            if(data[i]!=null) {
+                System.out.println((data[i].toString()));
+            }
+        }
+
     }
     public void raiseWage(double raise){
         for(Employee a: data){
@@ -102,7 +102,7 @@ public class PersonnelManager {
             a.raiseWages(raise);
 
         }
-        System.out.println("Wages have been raised by: "+raise+"%");
+
     }
     @Override
     public String toString() {

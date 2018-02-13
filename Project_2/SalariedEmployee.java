@@ -27,7 +27,10 @@ public class SalariedEmployee extends Employee {
 
     @Override
     public String toString() {
-        return String.format("%s      $%.2f/year",super.getName(), super.getWage());
+        String strDouble = String.format("%.2f", super.getWage());
+        int count = 29 - (super.getName().length()+strDouble.length());
+        String spaces = String.format("%"+count+"s", "");
+        return String.format("%s"+"      s%"+ count+"s$%.2f/year",super.getName(),"",super.getWage());
 
     }
 }

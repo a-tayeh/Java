@@ -29,8 +29,6 @@ public class Ali_Tayeh_Problem02<T>{
 			firstNode = newNode;
 			numOfEntries++;
 			return true;
-		
-		
 	}
 
 /********************************************************************************
@@ -39,7 +37,7 @@ public class Ali_Tayeh_Problem02<T>{
 *********************************************************************************/
 
 
-        public void remove(int index) {
+        public void removeIndex(int index) {
 			boolean result = false;
 			Node temp = firstNode;
 			if(index == 1){
@@ -51,9 +49,7 @@ public class Ali_Tayeh_Problem02<T>{
 			}
 			Node next = temp.next.next;
 			temp.next = next;
-			numOfEntries--;
-			
-			
+			numOfEntries--;	
  		}
 
  		public void insert(int index, T entry) {
@@ -71,8 +67,6 @@ public class Ali_Tayeh_Problem02<T>{
 			 newNode.next = current;
     		 previous.next = newNode;			
 			 numOfEntries++;
-			
-			
  		} 
 
 
@@ -99,12 +93,7 @@ public class Ali_Tayeh_Problem02<T>{
 		}
 		return result;
 	}
-	public void removeEntry(int index){
-		Node currentNode = firstNode;
-		while((index < numOfEntries)&& currentNode!=null){
-			
-		}
-	}
+	
 
 
 
@@ -121,19 +110,7 @@ public class Ali_Tayeh_Problem02<T>{
 			this.data = dataPortion;
 			this.next = nextNode;
 		}
-		public T getData() {
-			return data; 
-			} // end getData
-		public void setData(T newData) {
-			    data = newData;
-			 } // end setData
-		public Node getNextNode() {
-			return next;
-		} // end getNextNode
-		public void setNextNode(Node nextNode) {
-			next = nextNode;
-		} 
-
+	
 	}
 
 		public static void main(String[] args){
@@ -142,80 +119,68 @@ public class Ali_Tayeh_Problem02<T>{
 		Ali_Tayeh_Problem02 obj = new Ali_Tayeh_Problem02();
 		//asks for user input to set how many DNA Nucleobase our string should have
 		Scanner in =  new Scanner(System.in);
-		// int limit = in.nextInt();
+		int limit = in.nextInt();
 		int counter = 0;
+		boolean done = false;
+		String [] choices;
+		int index = 0;
+
 
 /********************************************************************************
 *								WORK IN PROGRESS
 *
 *********************************************************************************/
+		
+		while(counter<limit){
+			// this creates a random  num b/w 1-4
+			// it will pass in an entry based on which random number cameback
+			int random = (int)(Math.random()*4+1);
+			switch(random){
+				case 1:
+					obj.add("A");
+					break;
+				case 2:
+					obj.add("G");
+					break;
+				case 3: 
+					obj.add("T");
+					break;
+				case 4:
+					obj.add("C");
+					break;
+			}
+			counter++;
 
-		// int counter = 0;
-		obj.add("A");
-		obj.add("T");
-		obj.add("C");
-		obj.add("G");
-		System.out.println("Before removing at index 2");
+		}
 
 		for(Object a: obj.toArray()){
 			System.out.printf("%s",a);
-		}
+		}	
 		System.out.println();
-		obj.remove(2);
 
-		System.out.println("AFTER removing at index 2");
+		while(!done){
+			choices = in.nextLine().split("\\s+");
+			if(choices[0].equalsIgnoreCase("i")){
+				index = Integer.parseInt(choices[1]);
+				obj.insert(index,choices[2]);
+			}
+			else if(choices[0].equalsIgnoreCase("d")){
+				index = Integer.parseInt(choices[1]);
+				obj.removeIndex(index);
+			}
+			else if(choices[0].equalsIgnoreCase("e")){
+				done = true;
+			}
+
+		}
 
 		for(Object a: obj.toArray()){
 			System.out.printf("%s",a);
-		}
+		}	
 		System.out.println();
 
-		System.out.println("Before inserting a C at index 2");
-
-		for(Object a: obj.toArray()){
-			System.out.printf("%s",a);
-		}
-		System.out.println();
-		obj.insert(2,"C");
-
-		System.out.println("AFTER inserting a C at index 2");
-
-		for(Object a: obj.toArray()){
-			System.out.printf("%s",a);
-		}
-		System.out.println();
-		// String g = "G";
-		// obj.remove(String g);
-
-/********************************************************************************
-*								WORK IN PROGRESS
-*
-*********************************************************************************/
-
-		// while(counter<limit){
-		// 	// this creates a random  num b/w 1-4
-		// 	// it will pass in an entry based on which random number cameback
-		// 	int random = (int)(Math.random()*4+1);
-		// 	switch(random){
-		// 		case 1:
-		// 			obj.add("A");
-		// 			break;
-		// 		case 2:
-		// 			obj.add("G");
-		// 			break;
-		// 		case 3: 
-		// 			obj.add("T");
-		// 			break;
-		// 		case 4:
-		// 			obj.add("C");
-		// 			break;
-		// 	}
-		// 	counter++;
-		// }	
 
 
-		// this is just me looping throw the toArray method that's coming from Ali_Tayeh... class
-		// and print out the string of DNA Nucleobase
 		
 
 	}catch(Exception e){System.out.println(e.getMessage());}

@@ -110,13 +110,15 @@ public class Ali_Tayeh_Problem02<T>{
 			this.data = dataPortion;
 			this.next = nextNode;
 		}
+
+
 	
 	}
 
 		public static void main(String[] args){
 
 		try{
-		Ali_Tayeh_Problem02 obj = new Ali_Tayeh_Problem02();
+		Ali_Tayeh_Problem02<Object> obj = new Ali_Tayeh_Problem02<Object>();
 		//asks for user input to set how many DNA Nucleobase our string should have
 		Scanner in =  new Scanner(System.in);
 		int limit = in.nextInt();
@@ -134,8 +136,9 @@ public class Ali_Tayeh_Problem02<T>{
 		while(counter<limit){
 			// this creates a random  num b/w 1-4
 			// it will pass in an entry based on which random number cameback
-			int random = (int)(Math.random()*4+1);
-			switch(random){
+			double random = (Math.random()*4+1);
+			int rand = (int)random;
+			switch(rand){
 				case 1:
 					obj.add("A");
 					break;
@@ -162,6 +165,7 @@ public class Ali_Tayeh_Problem02<T>{
 			choices = in.nextLine().split("\\s+");
 			if(choices[0].equalsIgnoreCase("i")){
 				index = Integer.parseInt(choices[1]);
+
 				obj.insert(index,choices[2]);
 			}
 			else if(choices[0].equalsIgnoreCase("d")){

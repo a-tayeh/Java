@@ -31,15 +31,16 @@ public class Ali_Tayeh_Problem02<T>{
 			return true;
 	}
 
-/********************************************************************************
-*								WORK IN PROGRESS
-*
-*********************************************************************************/
-
+		/** 
+ 		*		A remove at index method that takes in the position in which data will be deleted 
+ 		* as first argument.
+ 		*
+ 		****/
 
         public void removeIndex(int index) {
 			boolean result = false;
 			Node temp = firstNode;
+
 			if(index == 1){
 				firstNode = temp.next;
 				numOfEntries--;
@@ -51,23 +52,36 @@ public class Ali_Tayeh_Problem02<T>{
 			temp.next = next;
 			numOfEntries--;	
  		}
-
+ 		/** 
+ 		*		An insert method that takes in the position in which data will be inserted 
+ 		* as first argument and the type of data that will be inserted as a second argument
+ 		*
+ 		****/
  		public void insert(int index, T entry) {
 			Node newNode = new Node(entry);
 			Node current = firstNode;
     		Node previous = null;
+    		// if it's the first node in our chain then we simply call the add method and pass in the entry
 			if(index == 1){
 				add(entry);
-				return;
+				numOfEntries++;
+				return; // this stops our method
 			}
+			// otherwise, it will go through our chain looking for the node previous to the position in which
+			// the new node will be inserted
 			for(int i = 1; current!=null && i<index;i++){
 					previous = current;
 					current = current.next;
 			}
+
 			 newNode.next = current;
     		 previous.next = newNode;			
 			 numOfEntries++;
  		} 
+
+ 		public int getNumEntries(){
+ 			return numOfEntries;
+ 		}
 
 
 
@@ -78,13 +92,13 @@ public class Ali_Tayeh_Problem02<T>{
 
 
 
-		/** Retrieves all entries that are in this bag.
-			@return A newly allocated array of all the entries in this bag.
+		/** Retrieves all entries that are in this linkedchain.
+			@return A newly allocated array of all the entries in this linked chain.
 		*/
 	public T[] toArray() {
 		@SuppressWarnings("unchecked")
 		T[] result = (T[])new Object[numOfEntries]; // Unchecked cast
-		int index = 0;
+		int index = 1;
 		Node currentNode = firstNode;
 		while ((index < numOfEntries) && (currentNode != null)) {
 			result[index] = currentNode.data;
@@ -97,7 +111,10 @@ public class Ali_Tayeh_Problem02<T>{
 
 
 
-	 
+	/** 
+	* An inner class node that has two instance variables , data and next, along with
+	*  two contructors, a default one for the first initial node
+	*/
 	private class Node{
 
 		private T data;
@@ -115,62 +132,52 @@ public class Ali_Tayeh_Problem02<T>{
 	
 	}
 
+
+
+/********************************************************************************
+*								Main Method
+*
+*********************************************************************************/
+
 		public static void main(String[] args){
 
+
 		try{
+		// instanciate and object of type Ali_Tayeh_Problem02 and pass in a type parameter Object	
 		Ali_Tayeh_Problem02<Object> obj = new Ali_Tayeh_Problem02<Object>();
-		//asks for user input to set how many DNA Nucleobase our string should have
+		//Asks for user input to set how many DNA Nucleobase our string should have
 		Scanner in =  new Scanner(System.in);
-		int limit = in.nextInt();
 		int counter = 0;
 		boolean done = false;
 		String [] choices;
 		int index = 0;
 
-
-/********************************************************************************
-*								WORK IN PROGRESS
-*
-*********************************************************************************/
 		
-		while(counter<limit){
-			// this creates a random  num b/w 1-4
-			// it will pass in an entry based on which random number cameback
-			double random = (Math.random()*4+1);
-			int rand = (int)random;
-			switch(rand){
-				case 1:
-					obj.add("A");
-					break;
-				case 2:
-					obj.add("G");
-					break;
-				case 3: 
-					obj.add("T");
-					break;
-				case 4:
-					obj.add("C");
-					break;
-			}
-			counter++;
-
+		while(obj.getNumEntries()<=1000000){
+			obj.add("T");
+			obj.add("G");
+			obj.add("C");
+			obj.add("A");
 		}
+		// takes the number of nucleobase strings we'll edit
+		int limit = in.nextInt();
 
-		for(Object a: obj.toArray()){
-			System.out.printf("%s",a);
-		}	
-		System.out.println();
 
+	/**	A while loop that splits the user input based on white space and assign each value
+	*  to a string array position assuming the order of data in the input string is in the order of 
+	*  		<INSTRUCTION> <POSITION> <VALUE>
+	*/
 		while(!done){
 			choices = in.nextLine().split("\\s+");
 			if(choices[0].equalsIgnoreCase("i")){
 				index = Integer.parseInt(choices[1]);
-
 				obj.insert(index,choices[2]);
+				limit++;
 			}
 			else if(choices[0].equalsIgnoreCase("d")){
 				index = Integer.parseInt(choices[1]);
 				obj.removeIndex(index);
+				limit--;
 			}
 			else if(choices[0].equalsIgnoreCase("e")){
 				done = true;
@@ -178,15 +185,19 @@ public class Ali_Tayeh_Problem02<T>{
 
 		}
 
-		for(Object a: obj.toArray()){
-			System.out.printf("%s",a);
+		// a for loop that prints out the final results of our modified DNA Strand
+		for(int i = 1;i<=limit;i++){
+			System.out.print(obj.toArray()[i]);
 		}	
 		System.out.println();
 
 
 
-		
 
+
+
+		
+	// incase something goes wrong!
 	}catch(Exception e){System.out.println(e.getMessage());}
 		
 	}

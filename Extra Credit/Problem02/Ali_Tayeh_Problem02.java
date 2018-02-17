@@ -65,7 +65,7 @@ public class Ali_Tayeh_Problem02<T>{
 			if(index == 1){
 				add(entry);
 				numOfEntries++;
-				return; // this stops our method
+				return; // this exits our method
 			}
 			// otherwise, it will go through our chain looking for the node previous to the position in which
 			// the new node will be inserted
@@ -85,10 +85,6 @@ public class Ali_Tayeh_Problem02<T>{
 
 
 
-/********************************************************************************
-*								WORK IN PROGRESS
-*
-*********************************************************************************/
 
 
 

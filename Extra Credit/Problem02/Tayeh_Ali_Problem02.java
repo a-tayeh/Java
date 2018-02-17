@@ -1,13 +1,13 @@
 import java.util.Scanner;
 import java.lang.Math;
 
-public class Ali_Tayeh_Problem02<T>{
+public class Tayeh_Ali_Problem02<T>{
 
 
 	private Node firstNode;
 	private int numOfEntries;
 
-	public Ali_Tayeh_Problem02(){
+	public Tayeh_Ali_Problem02(){
 		this.firstNode = null;
 		this.numOfEntries = 0;
 	}
@@ -140,7 +140,7 @@ public class Ali_Tayeh_Problem02<T>{
 
 		try{
 		// instanciate and object of type Ali_Tayeh_Problem02 and pass in a type parameter Object	
-		Ali_Tayeh_Problem02<Object> obj = new Ali_Tayeh_Problem02<Object>();
+		Tayeh_Ali_Problem02<Object> obj = new Tayeh_Ali_Problem02<Object>();
 		//Asks for user input to set how many DNA Nucleobase our string should have
 		Scanner in =  new Scanner(System.in);
 		int counter = 0;

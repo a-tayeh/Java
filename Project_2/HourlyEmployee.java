@@ -36,9 +36,9 @@ public class HourlyEmployee extends Employee {
     @Override
     public String toString() {
         String strDouble = String.format("%.2f", super.getWage());
-        int count = 29 - (super.getName().length()+strDouble.length());
+        int count = 27 - (super.getName().length()+strDouble.length());
         String spaces = String.format("%"+count+"s", "");
-        return String.format("%s"+"      h%"+ count+"s$%.2f/hour",super.getName(),"",super.getWage());
+        return String.format("%s      h%"+ count+"s$%.2f/hour",super.getName(),"",super.getWage());
 
     }
 

@@ -95,14 +95,14 @@ public class Project2 {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
                             hourly = Double.parseDouble(arr2[4])/2080;
-                            newEmployees.add(" ("+lName+", "+fName+") ");
+                            newEmployees.add(lName+", "+fName);
                             obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                         }
                         else if (arr2[3].equalsIgnoreCase("h")) {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
                             hourly = Double.parseDouble(arr2[4]);
-                            newEmployees.add(" ("+lName+", "+fName+") ");
+                            newEmployees.add(lName+", "+fName);
                             obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
                         }
                         break;
@@ -127,9 +127,9 @@ public class Project2 {
             fromFile2.close();
 
             if(newEmployees.size()>0){
-                System.out.print("New Employee(s) Added: ");
+                System.out.print("New Employee(s) Added:  ");
                 for(String a : newEmployees){
-                    System.out.printf(a);
+                    System.out.printf("%s\n %23s", a.toString(), "");
                 }
                 System.out.println();
             }

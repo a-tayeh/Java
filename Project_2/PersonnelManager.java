@@ -112,9 +112,10 @@ public class PersonnelManager {
                 String name = data[i].getName();
                 double amount = data[i].computePay(hours);
                 String amountStr = String.format("$%.2f", amount);
-                int add = (data[i].getName().length()+amountStr.length());
-                int spaceCount = 47 - add;
-                String nana = String.format(name+"%"+spaceCount+"s",amountStr);
+                int add = (int)(data[i].getName().length() + amountStr.length());
+                int spaceCount = 40 - add;
+                String count = Integer.toString(spaceCount);
+                String nana = String.format("%s%"+count+"s%s",name,"",amountStr);
 //                System.out.println(data[i].getName().length()+" "+ amountStr.length());
                 System.out.println(nana);
             }

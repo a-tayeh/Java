@@ -5,6 +5,9 @@ public class PersonnelManager {
     private int capacity = 1;
 
     Employee [] data = new Employee[capacity];
+    ArrayList<String> payroll = new ArrayList<String>();
+
+
 
     public boolean addHourlyEmployee(HourlyEmployee obj){
         if(obj==null || !(obj instanceof HourlyEmployee)){
@@ -76,11 +79,13 @@ public class PersonnelManager {
         }
         return -1;
     }
-    public void deleteEmployee(String name){
+    public String deleteEmployee(String name){
         boolean delete = false;
+        String fullName = "";
         for(int i = 0;i < data.length && !delete;i++){
 
             if(data[i].getLastName().equalsIgnoreCase(name)){
+                    fullName = data[i].getName();
                     data[i] = data[data.length-1];
                     data[data.length-1] = null;
                     numOfEntries = numOfEntries-1;
@@ -88,6 +93,7 @@ public class PersonnelManager {
 
             }
         }
+        return fullName;
     }
     public void print(){
         for(int i =0;i<data.length;i++){
@@ -107,24 +113,30 @@ public class PersonnelManager {
     }
 
     public void weeklyPayroll(String lName, int hours){
+        double total = 0;
+        double amount = 0.0;
+        ArrayList<Double> pass = new ArrayList<Double>();
         for(int i = 0;i<numOfEntries;i++){
             if(data[i].getLastName().equalsIgnoreCase(lName)){
                 String name = data[i].getName();
-                double amount = data[i].computePay(hours);
+                amount = data[i].computePay(hours);
                 String amountStr = String.format("$%.2f", amount);
                 int add = (int)(data[i].getName().length() + amountStr.length());
                 int spaceCount = 40 - add;
                 String count = Integer.toString(spaceCount);
-                String nana = String.format("%s%"+count+"s%s",name,"",amountStr);
-//                System.out.println(data[i].getName().length()+" "+ amountStr.length());
-                System.out.println(nana);
+                String pay = String.format("%s%"+count+"s%s",name,"",amountStr);
+                payroll.add(pay);
             }
+
         }
-//        for(Employee a : data){
-//            int count = a.getName().length();
-//            System.out.println(a.getName() + );
-//        }
+
+
     }
+
+    public ArrayList getPayroll(){
+        return payroll;
+    }
+
 
 
     @Override

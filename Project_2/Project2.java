@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Project2 {
     public static void main(String[] args) {
@@ -24,7 +25,6 @@ public class Project2 {
         String fName = "";
         String lName = "";
         double hourly = 0.0;
-        double salaried = 0.0;
         String rate = "";
         String strDouble = "";
         String symbol = "";
@@ -38,12 +38,16 @@ public class Project2 {
  *  **************************************************************************************************************
  */
         try {
-
-            File n = new File("EmployeesIn.dat");
-            Scanner fromFile = new Scanner(n);
-            if (n.length() == 0) {
-                throw new IOException("file is empty?");
+            Scanner in = new Scanner(System.in);
+            String fileName = "EmployeesIn.dat";
+            File newFile = new File(fileName);
+            if(newFile.length()<1) {
+                do {
+                    System.out.print("The file doesn't exist,or contains no data , please enter another file name with extension: ");
+                    fileName = in.nextLine();
+                } while (newFile.length() < 1);
             }
+            Scanner fromFile = new Scanner(newFile);
             while (fromFile.hasNextLine() && arr.length < 5) {
                 arr = fromFile.nextLine().split("\\s+");
                 if (arr.length == 4) {
@@ -76,7 +80,6 @@ public class Project2 {
  */
 
 
-
 /****************************************************************************************************************
  *
  *                      READING & PARSING THE UPDATES.DAT
@@ -84,7 +87,16 @@ public class Project2 {
  *  **************************************************************************************************************
  */
         try{
-            Scanner fromFile2 = new Scanner(new File("Updates.dat"));
+            Scanner in = new Scanner(System.in);
+            String fileName = "Updates.dat";
+            File newFile = new File(fileName);
+            if(newFile.length()<1) {
+                do {
+                    System.out.print("The file doesn't exist,or contains no data , please enter another file name with extension: ");
+                    fileName = in.nextLine();
+                } while (newFile.length() < 1);
+            }
+            Scanner fromFile2 = new Scanner(newFile);
             while(fromFile2.hasNextLine()) {
                 inCase = fromFile2.nextLine();
                 arr2 = inCase.split("\\s+");
@@ -107,8 +119,9 @@ public class Project2 {
                         }
                         break;
                     case "d":
-                        System.out.println("Deleted employee: " + arr2[1]);
-                        obj.deleteEmployee(arr2[1]);
+//                        System.out.println("Deleted employee: " + arr2[1]);
+
+                        deletedEmployees.add(obj.deleteEmployee(arr2[1]));
                         break;
                     case "r":
                         obj.raiseWage(Double.parseDouble(arr2[1]));
@@ -119,7 +132,7 @@ public class Project2 {
                 if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
                         || symbol.equalsIgnoreCase("d"))){
 
-                    System.out.println("< Command not recognized on line: "+lineCounter+" >\t"+inCase);
+                    System.out.println("Command not recognized on line "+lineCounter+": \t"+inCase);
                 }
                 lineCounter++;
             }
@@ -133,6 +146,13 @@ public class Project2 {
                 }
                 System.out.println();
             }
+            if(deletedEmployees.size()>0){
+                System.out.print("Deleted Employee(s):    ");
+                for(String a: deletedEmployees){
+                    System.out.printf("%s%23s\n",a, "");
+                }
+            }
+            System.out.println();
 
         }
         catch (Exception e){
@@ -146,13 +166,12 @@ public class Project2 {
      */
 
 
-
-    /****************************************************************************************************************
-     *
-     *                     WRITING OUT THE EMPLOYEESOUT.DAT
-     *
-     *  **************************************************************************************************************
-     */
+        /****************************************************************************************************************
+         *
+         *                     WRITING OUT THE EMPLOYEESOUT.DAT
+         *
+         *  **************************************************************************************************************
+         */
 
         try {
             FileWriter writeOut = new FileWriter("EmployeesOut.dat");
@@ -168,6 +187,8 @@ public class Project2 {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        System.out.println("\nWriting out to EmployeesOut.dat\n");
         obj.print();
 /****************************************************************************************************************
  *
@@ -175,7 +196,6 @@ public class Project2 {
  *
  *  **************************************************************************************************************
  */
-
 
 
 /****************************************************************************************************************
@@ -187,153 +207,55 @@ public class Project2 {
         try {
             File na = new File("HoursWorked.dat");
             Scanner fromFile3 = new Scanner(na);
-            while(fromFile3.hasNextLine()){
+            while (fromFile3.hasNextLine()) {
                 inCase = fromFile3.nextLine();
                 arr3 = inCase.split("\\s+");
                 lName = arr3[0];
                 int hours = Integer.parseInt(arr3[1]);
-                obj.weeklyPayroll(lName,hours);
+                obj.weeklyPayroll(lName, hours);
 
 
             }
 
 
-
-        }catch (Exception err){
+        } catch (Exception err) {
             System.out.println(err.getMessage());
         }
-//        try{
-//            File
-//        }catch(Exception err){
-//            System.out.println(err.getMessage());
+
+        try {
+            FileWriter writeOut = new FileWriter("WeeklyPayroll.txt");
+            writeOut.write("Paycheck amount:\n");
+            writeOut.flush();
+            for (Object e : obj.getPayroll()) {
+                if (e != null) {
+                    writeOut.write("     " + e + "\n");
+                    writeOut.flush();
+                }
+            }
+            writeOut.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("\nWriting out to WeeklyPayroll.txt");
+        System.out.println("Paycheck amount:");
+//        String [] arr4 = new String[2];
+//        int total = 0;
+//        for (Object a : obj.getPayroll()) {
+//            a.toString().split("//s+");
+//            arr4[1]
 //        }
-
-
-
-
+        for (Object a : obj.getPayroll()) {
+            System.out.println("     "+a);
+        }
 
 
     }
+    private void printHeading(){
+        String name = "Ali Tayeh";
+        String projectNum = "Project2";
 
-//    public static void employeesIn() {
-//        PersonnelManager obj = new PersonnelManager();
-//        String[] arr = new String[4];
-//        String fName = "";
-//        String lName = "";
-//        double hourly = 0.0;
-//        String rate = "";
-//        String strDouble = "";
-//        String symbol = "";
-//        try {
-//
-//            File n = new File("EmployeesIn.dat");
-//            Scanner fromFile = new Scanner(n);
-//            if (n.length() == 0) {
-//                throw new IOException("file is empty?");
-//            }
-//            while (fromFile.hasNextLine() && arr.length < 5) {
-//                arr = fromFile.nextLine().split("\\s+");
-//                if (arr.length == 4) {
-//                    arr[0] = arr[0].replace(",", "");
-//
-//                    lName = arr[0];
-//                    fName = arr[1];
-//                    rate = arr[2];
-//                    hourly = Double.parseDouble(arr[3]);
-//                    if (rate.equalsIgnoreCase("h")) {
-//                        obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
-//                    } else if (rate.equalsIgnoreCase("s")) {
-//                        obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
-//                    }
-//                    arr = new String[4];
-//                }
-//
-//
-//            }
-//            fromFile.close();
-//        } catch (Exception err) {
-//            System.out.println(err.getMessage());
-//        }
-//
-//
-//
-//    }
-//    public static void updates(){
-//        PersonnelManager obj2 = new PersonnelManager();
-//        String[] arr2 = new String[4];
-//        String fName = "";
-//        String lName = "";
-//        double hourly = 0.0;
-//        String rate = "";
-//        String strDouble = "";
-//        String symbol = "";
-//        String inCase = "";
-//        try{
-//        Scanner fromFile2 = new Scanner(new File("Updates.dat"));
-//        while(fromFile2.hasNextLine()) {
-//            inCase = fromFile2.nextLine();
-//            arr2 = inCase.split("\\s+");
-//            symbol = arr2[0].toLowerCase();
-//            switch (symbol) {
-//                case "n":
-//                    if (arr2[3].equalsIgnoreCase("s")) {
-//                        lName = arr2[1].replace(",", "");
-//                        fName = arr2[2];
-//                        hourly = Double.parseDouble(arr2[4]);
-//                        System.out.println("New Employee: " + fName + ", " + lName);
-//                        obj2.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
-//                    }
-//                    else if (arr2[3].equalsIgnoreCase("h")) {
-//                        lName = arr2[1].replace(",", "");
-//                        fName = arr2[2];
-//                        hourly = Double.parseDouble(arr2[4]);
-//                        System.out.println("New Employee: " + fName + " " + lName);
-//                        obj2.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
-//                    }
-//                    break;
-//                case "d":
-//                    System.out.println("Deleted employee: " + arr2[1]);
-//                    obj2.deleteEmployee(arr2[1]);
-//                    break;
-//                case "r":
-//                    System.out.println("Wages have been raised by: " + arr2[1] + "%");
-//                    obj2.raiseWage(Double.parseDouble(arr2[1]));
-//                    break;
-//            }
-//
-//            if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
-//                    || symbol.equalsIgnoreCase("d"))){
-//
-//                System.out.println("<Command not recognized on line:>\t"+inCase);
-//            }
-//        }
-//
-//        fromFile2.close();
-//
-//        }
-//        catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public static void employeesOut(){
-//        PersonnelManager obj3 = new PersonnelManager();
-//        try {
-//            FileWriter writeOut = new FileWriter("EmployeesOut.dat");
-//
-//            for (Employee e : obj3.getArray()) {
-//                if (e != null) {
-//                    writeOut.write(e.toString() + "\n");
-//                    writeOut.flush();
-//                }
-//            }
-//            writeOut.close();
-//
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//
-//
-//
-//    }
+        System.out.printf("%s");
+    }
 }
+

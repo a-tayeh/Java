@@ -6,6 +6,7 @@ public class PersonnelManager {
 
     Employee [] data = new Employee[capacity];
     ArrayList<String> payroll = new ArrayList<String>();
+    ArrayList<Double> pass = new ArrayList<Double>();
 
 
 
@@ -115,11 +116,11 @@ public class PersonnelManager {
     public void weeklyPayroll(String lName, int hours){
         double total = 0;
         double amount = 0.0;
-        ArrayList<Double> pass = new ArrayList<Double>();
         for(int i = 0;i<numOfEntries;i++){
             if(data[i].getLastName().equalsIgnoreCase(lName)){
                 String name = data[i].getName();
                 amount = data[i].computePay(hours);
+                pass.add(amount);
                 String amountStr = String.format("$%.2f", amount);
                 int add = (int)(data[i].getName().length() + amountStr.length());
                 int spaceCount = 40 - add;
@@ -135,6 +136,9 @@ public class PersonnelManager {
 
     public ArrayList getPayroll(){
         return payroll;
+    }
+    public ArrayList getPayTotal(){
+        return pass;
     }
 
 

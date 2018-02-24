@@ -7,12 +7,18 @@ public class SalariedEmployee extends Employee {
 
     }
 
+
     @Override
     public double computePay(double hours) {
-        String strDouble = String.format("%.2f", getWage()/52);
+        String strDouble = String.format("%.2f", (super.getWage()/52));
         return Double.parseDouble(strDouble);
     }
-
+    public void setAnnualSalary(double annual){
+        super.setWage(annual/2080);
+    }
+    public double getAnnualSalary(){
+        return super.getWage();
+    }
     @Override
     public double getWage() {
         String strDouble = String.format("%.2f", super.getWage()*2080);
@@ -28,9 +34,9 @@ public class SalariedEmployee extends Employee {
     @Override
     public String toString() {
         String strDouble = String.format("%.2f", super.getWage());
-        int count = 27 - (super.getName().length()+strDouble.length());
+        int count = 34 - (super.getName().length()+strDouble.length());
         String spaces = String.format("%"+count+"s", "");
-        return String.format("%s      s%"+count+"s$%.2f/year",super.getName(),"",super.getWage()*2080);
+        return String.format("%s%"+count+"s$%.2f/year",super.getName(),"",super.getWage());
 
     }
 }

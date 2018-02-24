@@ -60,7 +60,6 @@ public class Project2 {
                     if (rate.equalsIgnoreCase("h")) {
                         obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
                     } else if (rate.equalsIgnoreCase("s")) {
-                        hourly = hourly/2080;
                         obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                     }
                     arr = new String[4];
@@ -106,7 +105,7 @@ public class Project2 {
                         if (arr2[3].equalsIgnoreCase("s")) {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
-                            hourly = Double.parseDouble(arr2[4])/2080;
+                            hourly = Double.parseDouble(arr2[4]);
                             newEmployees.add(lName+", "+fName);
                             obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                         }
@@ -158,17 +157,17 @@ public class Project2 {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-    /****************************************************************************************************************
-     *
-     *                     END OF READING & PARSING THE UPDATES.DAT
-     *
-     *  **************************************************************************************************************
-     */
+        /****************************************************************************************************************
+         *
+         *                                  END OF READING & PARSING THE UPDATES.DAT
+         *
+         *  **************************************************************************************************************
+         */
 
 
         /****************************************************************************************************************
          *
-         *                     WRITING OUT THE EMPLOYEESOUT.DAT
+         *                                      WRITING OUT THE EMPLOYEESOUT.DAT
          *
          *  **************************************************************************************************************
          */
@@ -178,8 +177,14 @@ public class Project2 {
 
             for (Employee e : obj.getArray()) {
                 if (e != null) {
-                    writeOut.write(e.toString() + "\n");
-                    writeOut.flush();
+                    if(e instanceof HourlyEmployee) {
+                        writeOut.write(String.format("%s   h   $%.2f\n", e.getName(),e.getWage()));
+                        writeOut.flush();
+                    }
+                    else if(e instanceof SalariedEmployee){
+                        writeOut.write(String.format("%s   s   $%.2f\n", e.getName(),((SalariedEmployee) e).getAnnualSalary()/2080));
+                        writeOut.flush();
+                    }
                 }
             }
             writeOut.close();
@@ -190,20 +195,20 @@ public class Project2 {
 
         System.out.println("\nWriting out to EmployeesOut.dat\n");
         obj.print();
-/****************************************************************************************************************
- *
- *                                      END OF WRITING OUT THE EMPLOYEESOUT.DAT
- *
- *  **************************************************************************************************************
- */
+        /****************************************************************************************************************
+         *
+         *                                      END OF WRITING OUT THE EMPLOYEESOUT.DAT
+         *
+         *  **************************************************************************************************************
+         */
 
 
-/****************************************************************************************************************
- *
- *                                      READING & PARSING HOURSWORKED.DAT
- *
- *  **************************************************************************************************************
- */
+        /****************************************************************************************************************
+         *
+         *                                      READING & PARSING HOURSWORKED.DAT
+         *
+         *  **************************************************************************************************************
+         */
         try {
             File na = new File("HoursWorked.dat");
             Scanner fromFile3 = new Scanner(na);
@@ -232,6 +237,13 @@ public class Project2 {
                     writeOut.flush();
                 }
             }
+            double total = 0;
+            for (Object a : obj.getPayTotal()) {
+                total+= (double)a;
+            }
+            writeOut.write(String.format("%36s---------\n", ""));
+            writeOut.write(String.format("%5sTotal%"+(34-Double.toString(total).length())+"s$%.2f","", "",total));
+            writeOut.flush();
             writeOut.close();
 
         } catch (Exception e) {
@@ -239,16 +251,13 @@ public class Project2 {
         }
         System.out.println("\nWriting out to WeeklyPayroll.txt");
         System.out.println("Paycheck amount:");
-//        String [] arr4 = new String[2];
-//        int total = 0;
-//        for (Object a : obj.getPayroll()) {
-//            a.toString().split("//s+");
-//            arr4[1]
-//        }
+
+
         for (Object a : obj.getPayroll()) {
             System.out.println("     "+a);
         }
 
+//        System.out.println(total);
 
     }
     private void printHeading(){

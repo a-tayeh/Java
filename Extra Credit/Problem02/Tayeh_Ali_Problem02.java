@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.lang.Math;
 
 public class Tayeh_Ali_Problem02<T>{
 
@@ -69,7 +68,7 @@ public class Tayeh_Ali_Problem02<T>{
 			}
 			// otherwise, it will go through our chain looking for the node previous to the position in which
 			// the new node will be inserted
-			for(int i = 1; current!=null && i<index;i++){
+			for(int i = 1; current!=null && i < index; i++){
 					previous = current;
 					current = current.next;
 			}
@@ -148,7 +147,7 @@ public class Tayeh_Ali_Problem02<T>{
 		String [] choices;
 		int index = 0;
 
-		
+		// creates our DNA string with a limit of a million
 		while(obj.getNumEntries()<=1000000){
 			obj.add("T");
 			obj.add("G");

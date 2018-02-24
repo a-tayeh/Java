@@ -19,13 +19,17 @@ public class Project2 {
         String[] arr3 = new String[4];
         ArrayList<String> newEmployees = new ArrayList<String>();
         ArrayList<String> newWages = new ArrayList<String>();
+        ArrayList<String> deletedEmployees = new ArrayList<String>();
+
         String fName = "";
         String lName = "";
         double hourly = 0.0;
+        double salaried = 0.0;
         String rate = "";
         String strDouble = "";
         String symbol = "";
         String inCase = "";
+        int lineCounter = 1;
 
 /****************************************************************************************************************
  *
@@ -52,6 +56,7 @@ public class Project2 {
                     if (rate.equalsIgnoreCase("h")) {
                         obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
                     } else if (rate.equalsIgnoreCase("s")) {
+                        hourly = hourly/2080;
                         obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                     }
                     arr = new String[4];
@@ -89,7 +94,7 @@ public class Project2 {
                         if (arr2[3].equalsIgnoreCase("s")) {
                             lName = arr2[1].replace(",", "");
                             fName = arr2[2];
-                            hourly = Double.parseDouble(arr2[4]);
+                            hourly = Double.parseDouble(arr2[4])/2080;
                             newEmployees.add(" ("+lName+", "+fName+") ");
                             obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
                         }
@@ -106,20 +111,21 @@ public class Project2 {
                         obj.deleteEmployee(arr2[1]);
                         break;
                     case "r":
-//                        System.out.println("Wages have been raised by: " + arr2[1] + "%");
                         obj.raiseWage(Double.parseDouble(arr2[1]));
-
+                        newWages.add(obj.toString());
                         break;
                 }
 
                 if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
                         || symbol.equalsIgnoreCase("d"))){
 
-                    System.out.println("<Command not recognized on line:>\t"+inCase);
+                    System.out.println("< Command not recognized on line: "+lineCounter+" >\t"+inCase);
                 }
+                lineCounter++;
             }
 
             fromFile2.close();
+
             if(newEmployees.size()>0){
                 System.out.print("New Employee(s) Added: ");
                 for(String a : newEmployees){
@@ -185,13 +191,22 @@ public class Project2 {
                 inCase = fromFile3.nextLine();
                 arr3 = inCase.split("\\s+");
                 lName = arr3[0];
-                hourly = Double.parseDouble(arr3[1]);
+                int hours = Integer.parseInt(arr3[1]);
+                obj.weeklyPayroll(lName,hours);
+
 
             }
+
+
 
         }catch (Exception err){
             System.out.println(err.getMessage());
         }
+//        try{
+//            File
+//        }catch(Exception err){
+//            System.out.println(err.getMessage());
+//        }
 
 
 
@@ -200,125 +215,125 @@ public class Project2 {
 
     }
 
-    public static void employeesIn() {
-        PersonnelManager obj = new PersonnelManager();
-        String[] arr = new String[4];
-        String fName = "";
-        String lName = "";
-        double hourly = 0.0;
-        String rate = "";
-        String strDouble = "";
-        String symbol = "";
-        try {
-
-            File n = new File("EmployeesIn.dat");
-            Scanner fromFile = new Scanner(n);
-            if (n.length() == 0) {
-                throw new IOException("file is empty?");
-            }
-            while (fromFile.hasNextLine() && arr.length < 5) {
-                arr = fromFile.nextLine().split("\\s+");
-                if (arr.length == 4) {
-                    arr[0] = arr[0].replace(",", "");
-
-                    lName = arr[0];
-                    fName = arr[1];
-                    rate = arr[2];
-                    hourly = Double.parseDouble(arr[3]);
-                    if (rate.equalsIgnoreCase("h")) {
-                        obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
-                    } else if (rate.equalsIgnoreCase("s")) {
-                        obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
-                    }
-                    arr = new String[4];
-                }
-
-
-            }
-            fromFile.close();
-        } catch (Exception err) {
-            System.out.println(err.getMessage());
-        }
-
-
-
-    }
-    public static void updates(){
-        PersonnelManager obj2 = new PersonnelManager();
-        String[] arr2 = new String[4];
-        String fName = "";
-        String lName = "";
-        double hourly = 0.0;
-        String rate = "";
-        String strDouble = "";
-        String symbol = "";
-        String inCase = "";
-        try{
-        Scanner fromFile2 = new Scanner(new File("Updates.dat"));
-        while(fromFile2.hasNextLine()) {
-            inCase = fromFile2.nextLine();
-            arr2 = inCase.split("\\s+");
-            symbol = arr2[0].toLowerCase();
-            switch (symbol) {
-                case "n":
-                    if (arr2[3].equalsIgnoreCase("s")) {
-                        lName = arr2[1].replace(",", "");
-                        fName = arr2[2];
-                        hourly = Double.parseDouble(arr2[4]);
-                        System.out.println("New Employee: " + fName + ", " + lName);
-                        obj2.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
-                    }
-                    else if (arr2[3].equalsIgnoreCase("h")) {
-                        lName = arr2[1].replace(",", "");
-                        fName = arr2[2];
-                        hourly = Double.parseDouble(arr2[4]);
-                        System.out.println("New Employee: " + fName + " " + lName);
-                        obj2.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
-                    }
-                    break;
-                case "d":
-                    System.out.println("Deleted employee: " + arr2[1]);
-                    obj2.deleteEmployee(arr2[1]);
-                    break;
-                case "r":
-                    System.out.println("Wages have been raised by: " + arr2[1] + "%");
-                    obj2.raiseWage(Double.parseDouble(arr2[1]));
-                    break;
-            }
-
-            if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
-                    || symbol.equalsIgnoreCase("d"))){
-
-                System.out.println("<Command not recognized on line:>\t"+inCase);
-            }
-        }
-
-        fromFile2.close();
-
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    public static void employeesOut(){
-        PersonnelManager obj3 = new PersonnelManager();
-        try {
-            FileWriter writeOut = new FileWriter("EmployeesOut.dat");
-
-            for (Employee e : obj3.getArray()) {
-                if (e != null) {
-                    writeOut.write(e.toString() + "\n");
-                    writeOut.flush();
-                }
-            }
-            writeOut.close();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-
-
-
-    }
+//    public static void employeesIn() {
+//        PersonnelManager obj = new PersonnelManager();
+//        String[] arr = new String[4];
+//        String fName = "";
+//        String lName = "";
+//        double hourly = 0.0;
+//        String rate = "";
+//        String strDouble = "";
+//        String symbol = "";
+//        try {
+//
+//            File n = new File("EmployeesIn.dat");
+//            Scanner fromFile = new Scanner(n);
+//            if (n.length() == 0) {
+//                throw new IOException("file is empty?");
+//            }
+//            while (fromFile.hasNextLine() && arr.length < 5) {
+//                arr = fromFile.nextLine().split("\\s+");
+//                if (arr.length == 4) {
+//                    arr[0] = arr[0].replace(",", "");
+//
+//                    lName = arr[0];
+//                    fName = arr[1];
+//                    rate = arr[2];
+//                    hourly = Double.parseDouble(arr[3]);
+//                    if (rate.equalsIgnoreCase("h")) {
+//                        obj.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
+//                    } else if (rate.equalsIgnoreCase("s")) {
+//                        obj.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
+//                    }
+//                    arr = new String[4];
+//                }
+//
+//
+//            }
+//            fromFile.close();
+//        } catch (Exception err) {
+//            System.out.println(err.getMessage());
+//        }
+//
+//
+//
+//    }
+//    public static void updates(){
+//        PersonnelManager obj2 = new PersonnelManager();
+//        String[] arr2 = new String[4];
+//        String fName = "";
+//        String lName = "";
+//        double hourly = 0.0;
+//        String rate = "";
+//        String strDouble = "";
+//        String symbol = "";
+//        String inCase = "";
+//        try{
+//        Scanner fromFile2 = new Scanner(new File("Updates.dat"));
+//        while(fromFile2.hasNextLine()) {
+//            inCase = fromFile2.nextLine();
+//            arr2 = inCase.split("\\s+");
+//            symbol = arr2[0].toLowerCase();
+//            switch (symbol) {
+//                case "n":
+//                    if (arr2[3].equalsIgnoreCase("s")) {
+//                        lName = arr2[1].replace(",", "");
+//                        fName = arr2[2];
+//                        hourly = Double.parseDouble(arr2[4]);
+//                        System.out.println("New Employee: " + fName + ", " + lName);
+//                        obj2.addSalariedEmployee(new SalariedEmployee(fName, lName, hourly));
+//                    }
+//                    else if (arr2[3].equalsIgnoreCase("h")) {
+//                        lName = arr2[1].replace(",", "");
+//                        fName = arr2[2];
+//                        hourly = Double.parseDouble(arr2[4]);
+//                        System.out.println("New Employee: " + fName + " " + lName);
+//                        obj2.addHourlyEmployee(new HourlyEmployee(fName, lName, hourly));
+//                    }
+//                    break;
+//                case "d":
+//                    System.out.println("Deleted employee: " + arr2[1]);
+//                    obj2.deleteEmployee(arr2[1]);
+//                    break;
+//                case "r":
+//                    System.out.println("Wages have been raised by: " + arr2[1] + "%");
+//                    obj2.raiseWage(Double.parseDouble(arr2[1]));
+//                    break;
+//            }
+//
+//            if(!(symbol.equalsIgnoreCase("n") || symbol.equalsIgnoreCase("r")
+//                    || symbol.equalsIgnoreCase("d"))){
+//
+//                System.out.println("<Command not recognized on line:>\t"+inCase);
+//            }
+//        }
+//
+//        fromFile2.close();
+//
+//        }
+//        catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//    public static void employeesOut(){
+//        PersonnelManager obj3 = new PersonnelManager();
+//        try {
+//            FileWriter writeOut = new FileWriter("EmployeesOut.dat");
+//
+//            for (Employee e : obj3.getArray()) {
+//                if (e != null) {
+//                    writeOut.write(e.toString() + "\n");
+//                    writeOut.flush();
+//                }
+//            }
+//            writeOut.close();
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//
+//
+//
+//    }
 }

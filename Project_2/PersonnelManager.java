@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.ArrayList;
 public class PersonnelManager {
     private int numOfEntries = 0;
     private int capacity = 1;
@@ -104,6 +105,27 @@ public class PersonnelManager {
         }
 
     }
+
+    public void weeklyPayroll(String lName, int hours){
+        for(int i = 0;i<numOfEntries;i++){
+            if(data[i].getLastName().equalsIgnoreCase(lName)){
+                String name = data[i].getName();
+                double amount = data[i].computePay(hours);
+                String amountStr = String.format("$%.2f", amount);
+                int add = (data[i].getName().length()+amountStr.length());
+                int spaceCount = 47 - add;
+                String nana = String.format(name+"%"+spaceCount+"s",amountStr);
+//                System.out.println(data[i].getName().length()+" "+ amountStr.length());
+                System.out.println(nana);
+            }
+        }
+//        for(Employee a : data){
+//            int count = a.getName().length();
+//            System.out.println(a.getName() + );
+//        }
+    }
+
+
     @Override
     public String toString() {
 

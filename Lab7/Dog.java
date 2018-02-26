@@ -1,4 +1,4 @@
-public class Dog {
+public class Dog implements Comparator<Dog>{
     private String dogName;
     private int count;
 
@@ -26,4 +26,10 @@ public class Dog {
     public void setCount(int count) {
         this.count = count;
     }
+    @Override
+    public  int compare(Dog lhs, Dog rhs) {
+        return lhs.getDogName().compareToIgnoreCase(rhs.getDogName());
+    }
+
+
 }

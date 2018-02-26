@@ -3,7 +3,7 @@
 /**
  * Comparator function object interface.
  */
-public interface Comparator<AnyType> 
+public interface Comparator<Dog> 
 {
     /**
      * Return the result of comparing lhs and rhs.
@@ -13,5 +13,5 @@ public interface Comparator<AnyType>
      *           0 if lhs is equal to rhs,
      *         > 0 if lhs is greater than rhs.
      */
-    int compare( AnyType lhs, AnyType rhs );
+    int compare( Dog lhs, Dog rhs );
 }

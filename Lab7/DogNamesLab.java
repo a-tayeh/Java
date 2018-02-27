@@ -42,7 +42,7 @@ public class DogNamesLab {
                 }
             }
             else if(args[0].equals("2")){
-                for(Dog a : alphabeticalDogs(dogsArray)){
+                for(Dog a : dogsArray){
                     System.out.println(a.getDogName());
                 }
             }
@@ -151,8 +151,11 @@ public class DogNamesLab {
                 continue;
             }
         }
-        return dogs;
+        dogsArray = dogs;
+        return dogsArray;
     }
+
+
 
 
 

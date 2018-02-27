@@ -83,27 +83,33 @@ public class DogNamesLab {
 
                     if (randDog1Count > randDog2Count && choice == 1) {
                         System.out.printf("Correcto mundo, %s has a count of %d while %s has a " +
-                                "count of %d", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
+                                "count of %d\n", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
                     }
-                    if (randDog1Count < randDog2Count && choice == 1) {
-                        System.out.printf("Nope, %s has a count of %d while %s has a " +
-                                "count of %d", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
+                    if(randDog1Count > randDog2Count && choice == 2){
+                        System.out.printf("nOpE, %s has a count of %d while %s has a " +
+                                "count of %d\n", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
                     }
-                    if (randDog1Count < randDog2Count && choice == 2) {
+                    if (randDog2Count < randDog1Count && choice == 1) {
                         System.out.printf("Correcto mundo, %s has a count of %d while %s has a " +
-                                "count of %d", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
+                                "count of %d\n", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
                     }
-                    if (randDog1Count > randDog2Count && choice == 2) {
-                        System.out.printf("Nope, %s has a count of %d while %s has a " +
-                                "count of %d", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
+                    if (randDog2Count < randDog1Count && choice == 2) {
+                        System.out.printf("nOpE, %s has a count of %d while %s has a " +
+                                "count of %d\n", randDog1Name, randDog1Count, randDog2Name, randDog2Count);
                     }
-                    System.out.println("Wanna Play Again? Y/N");
-                    String reset = input.nextLine();
+                    if(randDog1Count == randDog2Count){
+                        System.out.println("Both of these dogs have the same count");
+                    }
 
-                    if (reset.equalsIgnoreCase("Y")) {
-                        playAgain = false;
-                    } else if (reset.equalsIgnoreCase("N")) {
-                        playAgain = true;
+                    System.out.println("Wanna Play Again? Y/N");
+                    char reset = input.next().charAt(0);
+                    switch (reset){
+                        case 'Y':
+                            playAgain = false;
+                            break;
+                        case 'N':
+                            playAgain = true;
+                            break;
                     }
                }
             }

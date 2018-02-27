@@ -58,6 +58,12 @@ public class DogNamesLab {
                     int randDog2 = (int) Math.ceil(Math.random() * dogsArray.size());
                     int randDog1Count = dogsArray.get(randDog1).getCount();
                     int randDog2Count = dogsArray.get(randDog2).getCount();
+                    do{
+                         randDog1 = (int) Math.ceil(Math.random() * dogsArray.size());
+                         randDog2 = (int) Math.ceil(Math.random() * dogsArray.size());
+                         randDog1Count = dogsArray.get(randDog1).getCount();
+                         randDog2Count = dogsArray.get(randDog2).getCount();
+                    }while(randDog1Count == randDog2Count);
                     String randDog1Name = dogsArray.get(randDog1).getDogName();
                     String randDog2Name = dogsArray.get(randDog2).getDogName();
                     System.out.println("Which name is more popular for Anchorage dogs?(Type 1 or 2)");

@@ -148,7 +148,7 @@ public class DogNamesLab {
             else if(dog.compare(dogs.get(index),dogs.get(index+1))<0){
                 counter++;
                 index++;
-                continue;
+
             }
         }
         dogsArray = dogs;

@@ -5,10 +5,6 @@
  * in that array then sorts the array in ascending order using the counter values.
  */
 public class Sorter{
-    public static void main(String [] args){
-        int[] arr = {9,9,8,8,7,6,54,4,3,2,0,0};
-        sortIntArray(arr);
-    }
 
     public static int[] sortIntArray(int[] arr){
         // if array is null then throw an IllegalArgumentException

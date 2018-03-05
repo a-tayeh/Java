@@ -5,6 +5,10 @@
  * in that array then sorts the array in ascending order using the counter values.
  */
 public class Sorter{
+    public static void main(String [] args){
+        int[] arr = {9,9,8,8,7,6,54,4,3,2,0,0};
+        sortIntArray(arr);
+    }
 
     public static int[] sortIntArray(int[] arr){
         // if array is null then throw an IllegalArgumentException
@@ -30,6 +34,7 @@ public class Sorter{
          * creating the counters array and setting its size to be largest+1
          */
         int [] counters = new int[largest+1];
+
         // this will create our counters array
         for (int i = 0; i < arr.length; i++) {
         /**
@@ -44,26 +49,25 @@ public class Sorter{
         int index = 0;
         for(int i = 0;i<counters.length;i++) {
             /**
-             * if the counters[i] != 0 to ensure no 0 counters of any num will be used, e.g. 0 of 5 ( zero fives)
+             * if the counters[i] != 0 to ensure no 0 counters of any num will be used, e.g. counter is 0 of value 5 (zero fives)
              */
             if (counters[i] != 0){
                 /**
-                 * iterationTimes is used to determine how any times should a number be assigned at a particular index,
-                 * if iterationTimes is greater than zero then
+                 * iterationTimes is used to determine how any times should a number be assigned at a particular index
                  */
                 int iterationTimes = 0;
+                /**
+                 * this while loop will run as long as the iterationTimes is less than the counters[i], e.g. 0<2 will have
+                 * it running twice
+                 */
                 while (iterationTimes < counters[i]) {
-//                    if (iterationTimes > 0) {
                         arr[index] = i;
                         iterationTimes++;
-//                    } else {
-//                        arr[index] = i;
-//                        iterationTimes++;
-//                    }
-                    index++;
+                        index++;
                 }
             }
         }
+        // returns the sorted array;
         return arr;
     }
 }

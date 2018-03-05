@@ -7,15 +7,28 @@
 public class Sorter{
 
     public static int[] sortIntArray(int[] arr){
-        for(int i = 0;i<arr.length;i++){
-            if(arr[i]<0){ throw new IllegalArgumentException("The array cannot contain negative integers"); }
-        }
-        int largest = 0;
 
+        if(arr==null)
+            {throw new IllegalArgumentException("Cannot sort an array that is null!");}
+
+        if(arr.length==0)
+            {return arr;}
+
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i]<0){ throw new IllegalArgumentException("Unable to sort negative values in the array"); }
+        }
+        // where our largest num in the array will be assigned
+        int largest = 0;
+        /**
+         *  gets the largest integer in the array so we can build our counters array based on the size
+         *  of the largest num in that array
+         */
         for(int i = 0;i<arr.length;i++){
             if(largest<arr[i]) { largest = arr[i]; }
         }
-
+        /**
+         * creating the counters array and setting its size to be largest+1
+         */
         int [] counters = new int[largest+1];
 
         for (int i = 0; i < arr.length; i++) {

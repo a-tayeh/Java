@@ -81,5 +81,17 @@ public class SorterTest {
         int [] actual = Sorter.sortIntArray(arr);
         Assert.assertArrayEquals(expected,actual);
     }
+    @Test
+    public void sortIntArray11() {
+        int[] arr = {};
+        int [] expected = {};
+        int [] actual = Sorter.sortIntArray(arr);
+        Assert.assertArrayEquals(expected,actual);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void sortIntArray12() {
+        int[] arr = null;
+        Sorter.sortIntArray(arr);
+    }
 
 }

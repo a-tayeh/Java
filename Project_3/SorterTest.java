@@ -1,3 +1,9 @@
+/**
+ * Project 3 - SorterTest           Ali Tayeh           CMSC-256-001
+ *
+ * This is a Junit test class that checks if our class method in sorter behaves as described in the specs PDF.
+ */
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -65,6 +71,13 @@ public class SorterTest {
     public void sortIntArray9() {
         int[] arr = {10,9,8,7,6,5,4,3,2,1};
         int [] expected = {1,2,3,4,5,6,7,8,9,10};
+        int [] actual = Sorter.sortIntArray(arr);
+        Assert.assertArrayEquals(expected,actual);
+    }
+    @Test
+    public void sortIntArray10() {
+        int[] arr = {4,2,1,3,4,1,2,1,0,4};
+        int [] expected = {0,1,1,1,2,2,3,4,4,4};
         int [] actual = Sorter.sortIntArray(arr);
         Assert.assertArrayEquals(expected,actual);
     }

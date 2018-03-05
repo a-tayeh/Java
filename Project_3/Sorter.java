@@ -1,3 +1,9 @@
+/**
+ * Project 3 - Sorter           Ali Tayeh           CMSC-256-001
+ *
+ * This programs has a class method that takes in an array of integer, creates an array that records counter of values
+ * in that array then sorts the array in ascending order using the counter values.
+ */
 public class Sorter{
 
     public static int[] sortIntArray(int[] arr){
@@ -12,7 +18,9 @@ public class Sorter{
 
         int [] counters = new int[largest+1];
 
-        for (int i = 0; i < arr.length; i++) { counters[arr[i]]++ ; }
+        for (int i = 0; i < arr.length; i++) {
+            counters[arr[i]]++ ;
+        }
 
         int index = 0;
         for(int i = 0;i<counters.length;i++) {

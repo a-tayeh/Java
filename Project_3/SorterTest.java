@@ -1,5 +1,5 @@
 /**
- * Project 3 - SorterTest           Ali Tayeh           CMSC-256-001
+ * Project 3 - SorterTest           Ali Tayeh           CMSC-256-001        03/05/2018
  *
  * This is a Junit test class that checks if our class method in sorter behaves as described in the specs PDF.
  */

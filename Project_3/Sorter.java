@@ -1,5 +1,5 @@
 /**
- * Project 3 - Sorter           Ali Tayeh           CMSC-256-001
+ * Project 3 - Sorter           Ali Tayeh           CMSC-256-001        03/05/2018
  *
  * This programs has a class method that takes in an array of integer, creates an array that records counter of values
  * in that array then sorts the array in ascending order using the counter values.

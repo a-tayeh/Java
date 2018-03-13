@@ -37,8 +37,8 @@ public class CircularQueue<T> {
         }
         T tempFront = null;
         if (!isEmpty()) {
-            tempFront = queue[front];
-            queue[front] = null;
+            tempFront = queue[front+1];
+            queue[front+1] = null;
             front = (front + 1) % queue.length;
         }
         return tempFront;

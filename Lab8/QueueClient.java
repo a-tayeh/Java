@@ -2,12 +2,12 @@ public class QueueClient {
     public static void main(String[]args){
         CircularQueue<Object> obj = new CircularQueue<>(2);
         obj.enqueue("ali");
-        obj.enqueue("ali");
-        obj.enqueue("ali");
-        obj.enqueue("ali");
+        obj.enqueue("saleh");
+        obj.enqueue("tayeh");
+        obj.enqueue("faraj");
 
 
-//        System.out.println(obj.dequeue());
+
 
 //        System.out.println(obj.isEmpty());
         for(Object a : obj.toArray()){

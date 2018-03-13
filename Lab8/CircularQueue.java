@@ -5,7 +5,7 @@ public class CircularQueue<T> {
     private int front;
     private int rear;
     private int specifiedCapacity;
-    private final static int DEFAULT_CAPACITY = 9;
+    private final static int DEFAULT_CAPACITY = 5;
 
     public CircularQueue(){
         this(DEFAULT_CAPACITY);
@@ -18,18 +18,24 @@ public class CircularQueue<T> {
         if(specifiedCapacity>DEFAULT_CAPACITY){
             throw new IllegalArgumentException("specified capacity is larger than defautl-capacity of: "+ DEFAULT_CAPACITY);
         }
+
 //        if(size()>specifiedCapacity){
 //            throw new IllegalArgumentException("specified capacity is larger than specified-capacity of: "+ specifiedCapacity);
 //
 //        }
-        this.specifiedCapacity = specifiedCapacity;
-        this.rear = 0;
-        this.front = 0;
-        @SuppressWarnings("unchecked")
-        T[] tempQueue = (T[]) new Object[specifiedCapacity+1];
-        queue = tempQueue;
-        front = 0;
-        rear = specifiedCapacity;
+        if(specifiedCapacity>0) {
+            this.specifiedCapacity = specifiedCapacity;
+            this.rear = 0;
+            this.front = 0;
+            @SuppressWarnings("unchecked")
+            T[] tempQueue = (T[]) new Object[specifiedCapacity + 1];
+            queue = tempQueue;
+            front = 0;
+            rear = specifiedCapacity;
+        }
+        else{
+            throw new IllegalArgumentException("Capacity can't be negative!");
+        }
 
     }
     public void enqueue(T entry){
@@ -57,10 +63,10 @@ public class CircularQueue<T> {
 
     public void checkCapacity(){
 
-        if (rear == queue.length) {
-            rear = 0;
-        }
-        if (front == ((rear + 2) % queue.length)){
+//        if (rear == queue.length) {
+//            rear = 0;
+//        }
+        if (isFull()){
             T[] oldQueue = queue;
             int oldSize = oldQueue.length;
 
@@ -93,6 +99,10 @@ public class CircularQueue<T> {
             }
         }
         return total;
+    }
+
+    public boolean isFull(){
+        return front == ((rear + 2) % queue.length);
     }
 
 

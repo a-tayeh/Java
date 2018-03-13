@@ -11,6 +11,7 @@ public class QueueClient {
         obj.dequeue();
         obj.dequeue();
         obj.enqueue("Gray");
+        System.out.println(obj.isFull());
 
 
 

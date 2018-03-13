@@ -15,6 +15,9 @@ public class CircularQueue<T> {
     }
 
     public CircularQueue(int specifiedCapacity) {
+        if(specifiedCapacity>DEFAULT_CAPACITY){
+            throw new IllegalArgumentException("specified capacity is larger than defautl-capacity of: "+DEFAULT_CAPACITY);
+        }
         this.specifiedCapacity = specifiedCapacity;
         this.rear = 0;
         this.front = 0;

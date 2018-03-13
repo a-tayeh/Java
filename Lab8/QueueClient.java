@@ -5,6 +5,15 @@ public class QueueClient {
         obj.enqueue("saleh");
         obj.enqueue("tayeh");
         obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+        obj.enqueue("faraj");
+
 
 
 
@@ -15,6 +24,7 @@ public class QueueClient {
                 System.out.println(a + " ");
             }
         }
+        System.out.println(obj.size());
 
     }
 }

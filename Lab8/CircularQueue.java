@@ -7,25 +7,29 @@ public class CircularQueue<T> {
     private int specifiedCapacity;
     private final static int DEFAULT_CAPACITY = 10;
 
-
-    public CircularQueue(int specifiedCapacity) {
-        this.specifiedCapacity = specifiedCapacity;
-        this.rear = 0;
-        this.front = 0;
-        @SuppressWarnings("unchecked")
-        T[] tempQueue = (T[]) new Object[specifiedCapacity];
-        queue = tempQueue;
-        front = 0;
-        rear = specifiedCapacity;
-
-    }
     public CircularQueue(){
         this(DEFAULT_CAPACITY);
         this.rear = 0;
         this.front = 0;
 
     }
+
+    public CircularQueue(int specifiedCapacity) {
+        this.specifiedCapacity = specifiedCapacity;
+        this.rear = 0;
+        this.front = 0;
+        @SuppressWarnings("unchecked")
+        T[] tempQueue = (T[]) new Object[specifiedCapacity+1];
+        queue = tempQueue;
+        front = 0;
+        rear = specifiedCapacity;
+
+    }
     public void enqueue(T entry){
+        if(size()==DEFAULT_CAPACITY){
+            System.out.println("You've reached max capacity");
+            return;
+        }
         checkCapacity();
         rear = (rear + 1) % queue.length;
         queue[rear] = entry;
@@ -74,6 +78,15 @@ public class CircularQueue<T> {
 
     public T[] toArray(){
         return queue;
+    }
+    public int size(){
+        int total = 0;
+        for(int i = 0;i<queue.length;i++){
+            if(queue[i]!=null){
+                total++;
+            }
+        }
+        return total;
     }
 
 

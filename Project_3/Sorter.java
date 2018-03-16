@@ -1,11 +1,15 @@
 /**
- * Project 3 - Sorter           Ali Tayeh           CMSC-256-001        03/05/2018
+ * Project 3 - Sorter           Ali Tayeh           CMSC-256-001        03/15/2018
  *
  * This programs has a class method that takes in an array of integer, creates an array that records counter of values
  * in that array then sorts the array in ascending order using the counter values.
  */
 public class Sorter{
-
+    /**
+     *
+     * @param arr
+     * @return a new sorted array of the input array
+     */
     public static int[] sortIntArray(int[] arr){
         // if array is null then throw an IllegalArgumentException
         if(arr==null)
@@ -34,10 +38,12 @@ public class Sorter{
         // this will create our counters array
         for (int i = 0; i < arr.length; i++) {
         /**
-         * this will increment the number of times an element in arr[i] occurs in arr and stores it in counters array
+         * this will increment the number of times an element occurs in arr and stores it in counters array
          */
             counters[arr[i]]++ ;
         }
+
+
         /**
          * This is the heart of our method, it rebuilds/sorts the original using the counters array
          */
@@ -45,7 +51,8 @@ public class Sorter{
         int index = 0;
         for(int i = 0;i<counters.length;i++) {
             /**
-             * if the counters[i] != 0 to ensure no 0 counters of any num will be used, e.g. counter is 0 of value 5 (zero fives)
+             * the counters[i] != 0 to ensure no 0 counters of any num will be used, e.g. counter is 0 of value 5 (zero fives) won't be
+             * used in our algo
              */
             if (counters[i] != 0){
                 /**
@@ -62,8 +69,14 @@ public class Sorter{
                         index++;
                 }
             }
+
         }
+        /**
+         * This is the declaration of a new int array called sortedArray and assigning it the sorted values of the input array
+         */
+        int [] sortedArray = new int[arr.length];
+        sortedArray = arr;
         // returns the sorted array;
-        return arr;
+        return sortedArray;
     }
 }

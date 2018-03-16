@@ -1,10 +1,11 @@
 /**
- * Project 3 - SorterTest           Ali Tayeh           CMSC-256-001        03/05/2018
+ * Project 3 - SorterTest           Ali Tayeh           CMSC-256-001        03/15/2018
  *
  * This is a Junit test class that checks if our class method in sorter behaves as described in the specs PDF.
  */
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,7 +13,6 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class SorterTest {
-
 
     /**
      * Testing a CRAZY-LONG array
@@ -99,21 +99,10 @@ public class SorterTest {
     }
 
     /**
-     *  random array test
-     */
-    @Test
-    public void sortIntArray8() {
-        int[] arr = {9,9,8,8,7,6,54,4,3,2,0,0};
-        int [] expected = {0,0,2,3,4,6,7,8,8,9,9,54};
-        int [] actual = Sorter.sortIntArray(arr);
-        Assert.assertArrayEquals(expected,actual);
-    }
-
-    /**
      * reverse array test
       */
     @Test
-    public void sortIntArray9() {
+    public void sortIntArray8() {
         int[] arr = {10,9,8,7,6,5,4,3,2,1};
         int [] expected = {1,2,3,4,5,6,7,8,9,10};
         int [] actual = Sorter.sortIntArray(arr);
@@ -121,10 +110,10 @@ public class SorterTest {
     }
 
     /**
-     * another random test
+     *  random test
      */
     @Test
-    public void sortIntArray10() {
+    public void sortIntArray9() {
         int[] arr = {4,2,1,3,4,1,2,1,0,4};
         int [] expected = {0,1,1,1,2,2,3,4,4,4};
         int [] actual = Sorter.sortIntArray(arr);
@@ -135,7 +124,7 @@ public class SorterTest {
      * testing an empty array test
      */
     @Test
-    public void sortIntArray11() {
+    public void sortIntArray10() {
         int[] arr = {};
         int [] expected = {};
         int [] actual = Sorter.sortIntArray(arr);
@@ -146,9 +135,20 @@ public class SorterTest {
      * testing a null array
      */
     @Test(expected = IllegalArgumentException.class)
-    public void sortIntArray12() {
+    public void sortIntArray11() {
         int[] arr = null;
         Sorter.sortIntArray(arr);
+    }
+
+    /**
+     * Testing a fractions array
+     */
+    @Test
+    public void sortIntArray12() {
+        int[] arr = {12/5,3/2,13/4};
+        int [] expected = {3/2,12/5,13/4};
+        int [] actual = Sorter.sortIntArray(arr);
+        Assert.assertArrayEquals(expected,actual);
     }
 
 }

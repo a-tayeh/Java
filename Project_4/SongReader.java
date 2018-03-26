@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class SongReader {
     public static void main(String [] args){
-        System.out.println(matchedTags("playlist(1).data"));    }
+        System.out.println(matchedTags("playlist(1).data"));
+    }
 
     public static boolean matchedTags(String fileName) {
         StackInterface<String> tagStack = new ArrayStack<>();
@@ -20,6 +21,9 @@ public class SongReader {
 
             while (reader.hasNextLine()){
                 String line = reader.nextLine().trim();
+                if(line.contains("<song>")|| line.contains("</song>")){
+                    line = line.replaceAll("<song>,</song>","");
+                }
                 int j = line.indexOf('<');
                 while (j != -1) {
                     int k = line.indexOf('>', j + 1);
@@ -35,7 +39,19 @@ public class SongReader {
                         temp = tag.replace("/", "");
                         if(!openingTag.equals(temp) && !tag.equalsIgnoreCase("</song>")){
                             System.out.println("This is an error!");
-                            System.out.println(line);
+                            if(line.contains(openingTag) && line.contains(tag)) {
+                                System.out.println(line);
+                            }
+                            else if(line.contains(tag)&&!line.contains(openingTag)){
+                                if(line.length()>tag.length()) {
+                                    data = line.replaceAll(tag,"");
+                                    System.out.println(openingTag + " " + data + " " + tag);
+                                }
+                                else{
+                                    System.out.println(openingTag+" "+ data + " "+tag);
+                                }
+
+                            }
                         }
                         else {
                             if (line.contains(tag) && line.contains(temp)) {

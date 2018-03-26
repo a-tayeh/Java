@@ -13,7 +13,7 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
             DoubleLinkedNode firstNode = new DoubleLinkedNode(newEntry);
             first = firstNode;
             last = firstNode;
-            firstNode.previous = null;
+            firstNode.setPreviousNode(null);
             numElements++;
 
         }
@@ -55,7 +55,41 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 
     @Override
     public T remove (int givenPosition) {
-        return null;
+        if(givenPosition<1 || givenPosition>numElements+1){
+            throw new IndexOutOfBoundsException("naaaaah!");
+        }
+        DoubleLinkedNode currentNode = first;
+        if(givenPosition == 1 && getLength() == 1){
+            DoubleLinkedNode deleted = currentNode;
+            clear();
+            return deleted.getData();
+        }
+         if(givenPosition == 1 && !isEmpty()){
+            DoubleLinkedNode deleted = first;
+            first = currentNode.next;
+            numElements--;
+            first.previous = null;
+            return deleted.getData();
+        }
+
+
+        for(int i = 1;currentNode!=null && i<givenPosition-1;i++){
+            currentNode.previous = currentNode;
+            currentNode=currentNode.next;
+        }
+        DoubleLinkedNode deleted = currentNode.next;
+        if(givenPosition==numElements){
+            currentNode.next = null;
+            currentNode = last;
+            numElements--;
+
+            return deleted.getData();
+        }
+
+        currentNode.next.next.previous = currentNode;
+        currentNode.next = currentNode.next.next;
+        numElements--;
+        return deleted.getData();
     }
 
     @Override
@@ -67,7 +101,29 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 
     @Override
     public T replace (int givenPosition, T newEntry) {
-        return null;
+        if(givenPosition<1 || givenPosition>numElements+1 || isEmpty()){
+            throw new IndexOutOfBoundsException("nopeee!");
+        }
+
+        DoubleLinkedNode currentNode = first;
+        DoubleLinkedNode newNode = new DoubleLinkedNode(newEntry);
+        if(givenPosition == 1){
+            first = newNode;
+            currentNode.next.previous=first;
+            first.previous = null;
+            return first.getData();
+
+        }
+
+        for(int i = 1;currentNode!=null && i<givenPosition-1;i++){
+            currentNode.previous = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        newNode.next = currentNode.next.next;
+        currentNode.next = newNode;
+        newNode.previous = currentNode;
+        return newNode.getData();
     }
 
     @Override
@@ -82,7 +138,16 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 
     @Override
     public T[] toArray() {
-        return null;
+        @SuppressWarnings("unchecked")
+        T[] newArr = (T[]) new Object[numElements];
+        if(!isEmpty()) {
+            DoubleLinkedNode currentNode = first;
+            for (int i = 0; i < numElements; i++) {
+                newArr[i] = currentNode.getData();
+                currentNode = currentNode.next;
+            }
+        }
+        return newArr;
     }
 
     @Override
@@ -188,17 +253,14 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
     }
     public static void main(String [] args){
         DoubleLinkedList<String> list = new DoubleLinkedList<String>();
-//        list.add("Ali");
+        list.add("Ali");
 //        list.add("ME");
 //        list.add("sammy");
+//        list.add("Will");
+
+//        System.out.println(list.getNodeAt(1).getData());
+        System.out.println(list.remove(1));
 //        System.out.println(list.getLength());
-        list.add("Will");
-        list.add("Dustin");
-        list.add("Lucas");
-        list.add("Mike");
-        list.add("Eleven");
-        list.add(6,"barb");
-        System.out.println(list.getNodeAt(6).getData());
 //        System.out.println(list.getNodeAt(4).getPreviousNode().getData());
 
 

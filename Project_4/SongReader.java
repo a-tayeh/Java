@@ -10,6 +10,10 @@ public class SongReader {
         StackInterface<String> tagStack = new ArrayStack<>();
         String temp = "";
         String tag = "";
+        String openingTag = "";
+        String data = "";
+        boolean closingMatch = false;
+        boolean onLine = false;
 
         try {
             Scanner reader = new Scanner(new File(fileName));
@@ -25,43 +29,83 @@ public class SongReader {
                      tag = line.substring(j, k + 1);
 
                     if (!tag.startsWith("</")) {
-                        tagStack.push(tag);
+                         openingTag = tag;
+                         tagStack.push(tag);
                     } else {
                         temp = tag.replace("/", "");
-                        if(line.contains(tag) && line.contains(temp)) {
-                            String data = line.replaceAll(tag, "");
-                            data = data.replaceAll(temp, "");
-                            System.out.println(temp.replaceAll("<|>","")+": "+data.trim());
+                        if(!openingTag.equals(temp) && !tag.equalsIgnoreCase("</song>")){
+                            System.out.println("This is an error!");
+                            System.out.println(line);
                         }
+                        else {
+                            if (line.contains(tag) && line.contains(temp)) {
+                                data = line.replaceAll(tag, "");
+                                data = data.replaceAll(temp, "");
+//                                System.out.println(temp.replaceAll("<|>", "") + ": " + data.trim());
 
-                        if (temp.equals(tagStack.peek())) {
-                            tagStack.pop();
+                            }
+                            else if(line.contains(tag) && !line.contains(openingTag)){
+
+                                data += line.replaceAll(tag,"");
+                            }
+
+
+                            if (temp.equals(tagStack.peek())) {
+                                closingMatch = true;
+                                tagStack.pop();
 
 //                            System.out.println(data);
+                            }
                         }
 
                     }
                     j = line.indexOf('<', k + 1);
 
 
+
                 }
 
-                String data = line.replaceAll(tag,"");
-                data = data.replaceAll(temp,"");
+
+                    if(closingMatch == false){
+                        if(line.length()>tag.length()){
+                            data = line.replaceAll(tag, "");
+                            data = data.replaceAll(temp, "");
+                        }
+                        else if(!line.contains(openingTag)){
+                            data = line;
+                        }
+                    }
+
+
                 if(data.length()>0){
                     data = data.trim();
                 }
-                if(tag.equals("<artist>") && !data.equals("")){
-                    System.out.println("artist: "+data);
-                }
-                else if(tag.equals("<album>")&&!data.equals("")){
-                    System.out.println("albums: "+data);
-                }
-                else if(tag.equals("<title>")&&!data.equals("")){
-                    System.out.println("title: "+data);
-                }
+
+                    if(closingMatch == true){
+
+                        if(tag.equals("</artist>") && !data.equals("")){
+                            System.out.println("artist: "+data);
+                            data = "";
+                        }
+                        else if(tag.equals("</album>")&&!data.equals("")){
+                            System.out.println("albums: "+data);
+                            data = "";
+                        }
+                        else if(tag.equals("</title>")&&!data.equals("")){
+                            System.out.println("title: "+data);
+                            data = "";
+                        }
+
+                        closingMatch = false;
+                    }
+
+
+
+
+
 
         }
+
     }catch (Exception e){
             System.out.println(e.getMessage());
         }

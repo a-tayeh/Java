@@ -1,11 +1,6 @@
 import java.util.Arrays;
 import java.util.EmptyStackException;
-/**
- A class of stacks whose entries are stored in an array.
- @author Frank M. Carrano
- @author Timothy M. Henry
- @version 4.0
- */
+
 public final class ArrayStack<T> implements StackInterface<T>
 {
     private T[] stack;    // Array of stack entries

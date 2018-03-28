@@ -14,16 +14,17 @@ public class SongReader {
         String openingTag = "";
         String data = "";
         boolean closingMatch = false;
-        boolean onLine = false;
+        boolean endOfSong = false;
 
         try {
             Scanner reader = new Scanner(new File(fileName));
 
             while (reader.hasNextLine()){
                 String line = reader.nextLine().trim();
-                if(line.contains("<song>")|| line.contains("</song>")){
-                    line = line.replaceAll("<song>,</song>","");
-                }
+//                if(line.contains("<song>") && line.length()==("<song>").length()){
+//                    tagStack.push(line);
+//                    line = reader.nextLine();
+//                }
                 int j = line.indexOf('<');
                 while (j != -1) {
                     int k = line.indexOf('>', j + 1);
@@ -33,13 +34,26 @@ public class SongReader {
                      tag = line.substring(j, k + 1);
 
                     if (!tag.startsWith("</")) {
-                         openingTag = tag;
-                         tagStack.push(tag);
+                        if(openingTag.equals("") || endOfSong!=true) {
+                            openingTag = tag;
+                            tagStack.push(tag);
+                        }
+                        else {
+                            if(endOfSong==true) {
+                                if (tag.equalsIgnoreCase("<artist>") || tag.equalsIgnoreCase("</artist>")) {
+                                    System.out.println("This is an error");
+                                    System.out.println(openingTag + " " + tag);
+                                    System.out.println(reader.nextLine());
+
+
+                                }
+                            }
+                        }
                     } else {
                         temp = tag.replace("/", "");
-                        if(!openingTag.equals(temp) && !tag.equalsIgnoreCase("</song>")){
+                        if(!openingTag.equals(temp) && (!tag.equalsIgnoreCase("</song>") && !tag.equalsIgnoreCase("<song>"))){
                             System.out.println("This is an error!");
-                            if(line.contains(openingTag) && line.contains(tag)) {
+                            if((line.contains(openingTag) && line.contains(tag)) || !line.contains("</song>")) {
                                 System.out.println(line);
                             }
                             else if(line.contains(tag)&&!line.contains(openingTag)){
@@ -67,8 +81,20 @@ public class SongReader {
 
 
                             if (temp.equals(tagStack.peek())) {
-                                closingMatch = true;
-                                tagStack.pop();
+                                if(endOfSong==false){
+                                    tagStack.pop();
+                                    closingMatch = true;
+                                    openingTag = "";
+                                }
+
+                                else
+                                    {
+                                        endOfSong = true;
+                                        closingMatch = true;
+                                        tagStack.pop();
+                                    }
+
+
 
 //                            System.out.println(data);
                             }

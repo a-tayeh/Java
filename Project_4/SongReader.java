@@ -81,6 +81,9 @@ public class SongReader {
                         }
                     } else {
                         if(tag.equalsIgnoreCase("</song>")){
+                            if(errCheck==false){
+                                errFile.clear();
+                            }
                             if(errCheck == true){
                                 System.out.println("\n\n\n");
                                 System.out.println("error file");
@@ -104,7 +107,7 @@ public class SongReader {
                         }
                         temp = tag.replace("/", "");
                         if(!openingTag.equals(temp) && (!tag.equalsIgnoreCase("</song>") && !tag.equalsIgnoreCase("<song>"))){
-                            System.out.println("This is an error!");
+//                            System.out.println("This is an error!");
                             errCheck = true;
                             errFile.add(counter-1,line+"      <-----------------");
                             errFile.remove(counter);
@@ -135,13 +138,13 @@ public class SongReader {
                                 if(data.toLowerCase().contains("<album>") || data.toLowerCase().contains("</album>")){
                                     errCheck = true;
                                 }
-                                if(tag.equalsIgnoreCase("</artist")){
+                                if(tag.equalsIgnoreCase("</artist") && errCheck == false){
                                     artistName  = data;
                                 }
-                                else if(tag.equalsIgnoreCase("</title")){
+                                else if(tag.equalsIgnoreCase("</title") && errCheck == false){
                                     songName = data;
                                 }
-                                else if(tag.equalsIgnoreCase("</album")){
+                                else if(tag.equalsIgnoreCase("</album") && errCheck == false){
                                     albumName = data;
                                 }
 //                                System.out.println(temp.replaceAll("<|>", "") + ": " + data.trim());
@@ -234,7 +237,7 @@ public class SongReader {
                 if(endOfSong==true && errCheck==false){
                     if(songName.length()!=0 && artistName.length()!=0&& albumName.length()!=0) {
                         songCollection.add(new Song(songName, artistName, albumName));
-                        endOfSong = false;
+//                        endOfSong = false;
                     }
                     endOfSong = false;
                 }

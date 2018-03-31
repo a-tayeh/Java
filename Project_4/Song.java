@@ -1,9 +1,9 @@
-public class Song{
+public class Song implements Comparable<Song>{
     private String title;
     private String artist;
     private String album;
 
-    public Song(String title, String artist, String album) {
+    public Song(String title, String artist, String album){
         this.title = title;
         this.artist = artist;
         this.album = album;
@@ -41,5 +41,10 @@ public class Song{
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public int compareTo(Song o) {
+        return 0;
     }
 }

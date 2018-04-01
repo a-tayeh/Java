@@ -1,8 +1,3 @@
-/**
- An interface for the ADT stack.
- @author Frank M. Carrano
- @version 4.0
- */
 public interface StackInterface<T>
 {
     /** Adds a new entry to the top of this stack.
@@ -11,12 +6,12 @@ public interface StackInterface<T>
 
     /** Removes and returns this stack's top entry.
      @return  The object at the top of the stack.
-     @throws  EmptyStackException if the stack is empty before the operation. */
+     @throws  @EmptyStackException if the stack is empty before the operation. */
     public T pop();
 
     /** Retrieves this stack's top entry.
      @return  The object at the top of the stack.
-     @throws  EmptyStackException if the stack is empty. */
+     @throws  @EmptyStackException if the stack is empty. */
     public T peek();
 
     /** Detects whether this stack is empty.

@@ -1,3 +1,10 @@
+/**
+ *          Ali Tayeh               Project_4           CMSC-256-001        Spring-2018
+ *
+ *  ArrayStack class that implements the StackInterface will be used to ensure opening and closing tags in
+ *  song input file are matched!
+ */
+
 import java.util.Arrays;
 import java.util.EmptyStackException;
 

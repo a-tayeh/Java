@@ -47,10 +47,6 @@ public class SongReader {
 
                     }
 
-//                    System.out.println();
-//                    System.out.println("New Song");
-//                    System.out.println("******************");
-
 
                 }
 
@@ -64,6 +60,14 @@ public class SongReader {
 
 
                     if (!tag.startsWith("</")) {
+                        if(!openingTag.equalsIgnoreCase("") && !openingTag.equalsIgnoreCase("<song>")){
+                            if(line.toLowerCase().contains("<title>") || line.toLowerCase().contains("<artist>") || line.toLowerCase().contains("<album>")){
+                                errCheck = true;
+                                errFile.add(counter-1,line+"      <-----------------");
+                                errFile.remove(counter);
+                            }
+                        }
+
                         if(openingTag.equals("") || endOfSong!=true) {
                             openingTag = tag;
                             tagStack.push(tag);
@@ -80,7 +84,9 @@ public class SongReader {
                             }
                         }
                     } else {
+
                         if(tag.equalsIgnoreCase("</song>")){
+
                             if(errCheck==false){
                                 errFile.clear();
                             }
@@ -106,6 +112,7 @@ public class SongReader {
 
                         }
                         temp = tag.replace("/", "");
+
                         if(!openingTag.equals(temp) && (!tag.equalsIgnoreCase("</song>") && !tag.equalsIgnoreCase("<song>"))){
 //                            System.out.println("This is an error!");
                             errCheck = true;
@@ -125,6 +132,8 @@ public class SongReader {
 //
 //                            }
                         }
+
+
                         else {
                             if (line.contains(tag) && line.contains(temp)) {
                                 data = line.replaceAll(tag, "");

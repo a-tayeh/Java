@@ -15,13 +15,14 @@ import java.util.Scanner;
 public class SongReader {
     // where our errorLog data will be stored
     private static ArrayList<String> errorLog = new ArrayList<>();
+    private static ArrayList<MySong> songCollection = new ArrayList<>();
 
 
     public static void main(String [] args){
         // call to printHeading
         printHeading();
         // takes in filename as command line args
-        parseSongData("playlist(1).data");
+//        parseSongData("playlist(1).data");
         // writing the ErrorLog.txt if there is an error
         if(errorLog.size()>0){
             try{
@@ -38,6 +39,7 @@ public class SongReader {
                 System.out.println(e.getMessage());
             }
         }
+        toArray();
     }
 
     private static void printHeading(){
@@ -53,11 +55,11 @@ public class SongReader {
 
     }
 
-    private static boolean parseSongData(String fileName) {
+    public static boolean parseSongData(String fileName) {
         // Declaring and initializing our stack where it will be used specifically for tag matching purposes
         StackInterface<String> tagStack = new ArrayStack<>();
         ArrayList<String> errFile = new ArrayList<>();
-        ArrayList<Song> songCollection = new ArrayList<>();
+
 
         // declaring and initializing our variables
         String temp = "";
@@ -140,6 +142,7 @@ public class SongReader {
                             }
                             endOfSong = true;
                             counter = 0;
+
 
                         }
                         temp = tag.replace("/", "");
@@ -268,6 +271,7 @@ public class SongReader {
                 if(endOfSong==true && errCheck==false ){
                     songCollection.add(new MySong(songName, artistName, albumName,playCount));
                     endOfSong = false;
+                    playCount =0;
 
                 }
 
@@ -288,6 +292,13 @@ public class SongReader {
 
 
         return tagStack.isEmpty();
+    }
+    public static MySong[] toArray(){
+        MySong[] songs = new MySong[songCollection.size()];
+        for(int i = 0;i<songs.length;i++){
+            songs[i] = songCollection.get(i);
+        }
+        return songs;
     }
 }
 /**

@@ -1,5 +1,6 @@
-public class MySong extends Song {
+public class MySong extends Song{
     private int playCount;
+    private Object obj;
 
     public MySong(int playCount) {
         this.playCount = playCount;
@@ -23,6 +24,9 @@ public class MySong extends Song {
             throw new IllegalArgumentException("Play Count can't be negative");
         }
     }
+
+
+
 
     @Override
     public String toString() {

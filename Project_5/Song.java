@@ -5,7 +5,7 @@
  *  super class Object
  */
 
-public class Song implements Comparable<Song>{
+public class Song implements Comparable{
     // our 3 instance variables
     private String title;
     private String artist;
@@ -85,32 +85,33 @@ public class Song implements Comparable<Song>{
     }
 
     @Override
-    public int compareTo(Song o) {
-        if(!(o instanceof Song) || o==null){
+    public int compareTo(Object object) {
+        Song obj = (Song)object;
+        if(!(obj instanceof Song) || obj==null){
             throw new IllegalArgumentException("Object is not an instance of Song object or it's null");
         }
 
-        else if(this.equals(o)){
+        else if(this.equals(obj)){
             return 0;
         }
-        else if(this.getArtist().compareTo(o.getArtist())<0){
+        else if(this.getArtist().compareTo(obj.getArtist())<0){
             return -1;
         }
-        else if(this.getArtist().compareTo(o.getArtist())>0){
+        else if(this.getArtist().compareTo(obj.getArtist())>0){
             return 1;
         }
-        else if(this.getArtist().compareTo(o.getArtist())==0){
-            if(this.getAlbum().compareTo(o.getAlbum())<0){
+        else if(this.getArtist().compareTo(obj.getArtist())==0){
+            if(this.getAlbum().compareTo(obj.getAlbum())<0){
                 return -1;
             }
-            else if(this.getAlbum().compareTo(o.getAlbum())>0){
+            else if(this.getAlbum().compareTo(obj.getAlbum())>0){
                 return 1;
             }
-            else if(this.getAlbum().compareTo(o.getAlbum())==0){
-                if(this.getTitle().compareTo(o.getTitle())<0){
+            else if(this.getAlbum().compareTo(obj.getAlbum())==0){
+                if(this.getTitle().compareTo(obj.getTitle())<0){
                     return -1;
                 }
-                else if(this.getTitle().compareTo(o.getTitle())>0){
+                else if(this.getTitle().compareTo(obj.getTitle())>0){
                     return 1;
                 }
             }

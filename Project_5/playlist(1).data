@@ -1,86 +1,226 @@
-
 <song>
-<title> Hurt You </title>
-<artist> The Weeknd </artist>
-<album> My Dear Melancholy </album>
-<playcount>12</playcount>
-
+  <title>
+    The Trapeze Swinger
+  </title>
+  <artist>
+    Iron & Wine
+  </artist>
+  <playcount>
+    131
+  </playcount>
+  <album>
+    The Trapeze Swinger - Single
+  </album>
 </song>
 
 <song>
-<title> King's Dead </title>
-<artist> Jay Rock </artist>
-<album> Single </album>
-<playcount>399</playcount>
-
+  <title>
+    Call It Dreaming
+  </title>
+  <playcount>
+    77
+  </playcount>
+  <artist>
+    Iron & Wine
+  </artist>
+  <album>
+    Beast Epic
+  </album>
+  https://www.youtube.com/watch?v=BXC80ZXQhvQ&feature=share
 </song>
 
 <song>
-<title> Ettala Fia </title>
-<artist> Carole Samaha </artist>
-<album> Helm </album>
-<playcount>52</playcount>
-
-</song>
-<song>
-<title> DNA </title>
-<artist> Kendrick Lamar</artist>
-<album> DAMN. </album>
-<playcount>16</playcount>
-
-</song>
-<song>
-<title> Party Monster </title>
-<artist> The Weeknd </artist>
-<album> Starboy </album>
-<playcount>7</playcount>
-
-</song>
-<song>
-<title> Heavy </title>
-<artist> Linkin Park </artist>
-<album> Heavy </album>
-<playcount>6</playcount>
-
-</song>
-<song>
-<title> La La La</title>
-<artist> Shakira </artist>
-<album> FIFA-14 </album>
-<playcount>31</playcount>
-
-</song>
-<song>
-<title> Unsteady </title>
-<artist> X Ambassadors </artist>
-<album> VHS </album>
-<playcount>23</playcount>
-
-</song>
-<song>
-<title> Diamonds </title>
-<artist> Rihanna </artist>
-<album> Uanapologetic </album>
-<playcount>1</playcount>
-
+  <title>
+    Passing Afternoon
+  </title>
+  Our Endless Numbered Days is the second full-length album from Iron & Wine. Released on March 23, 2004 on Sub Pop, it was the first non-solo effort by Sam Beam under his Iron & Wine moniker. Limited edition copies of the vinyl LP came with a bonus 7" vinyl single. Limited edition copies of the CD came with a bonus CD single.
+  <artist>
+    Iron & Wine
+  </artist>
+  <album>
+    Our Endless Numbered Days
+  </album>
+  <playcount>
+    19
+  </playcount>
 </song>
 
 <song>
-<title> Omri Kellou </title>
-<artist> Wael Kfouri </artist>
-<album> 9 </album>
-<playcount>2</playcount>
-
+  <album>
+    Garden State Soundtrack
+  </album>
+  <title>
+    Such Great Heights
+  </title>
+  <artist>
+    Iron & Wine
+  </artist>
+  <playcount>
+    137
+  </playcount>
 </song>
 
 <song>
-<title> 66 </title>
-<artist> Lil Yachty </artist>
-<album> none </album>
-<playcount>2</playcount>
-
+  <album>
+    Kiss Each Other Clean
+  </album>
+  <title>
+    Half Moon
+  </title>
+  <artist>
+    Iron & Wine
+  </artist>
+  <playcount>
+    13
+  </playcount>
 </song>
 
+<song>
+  <album>
+    Our Endless Numbered Days
+    <title>
+      Love and Some Verses
+    </title>
+    <artist>
+      Iron & Wine
+    </artist>
+  </album>
+  <playcount>
+    0
+  </playcount>
+</song>
 
+<song>
+<title>
+Sleepyhead
+</title>
+<artist>
+Passion Pit
+</artist>
+<album>
+Manners
+</album>
+<playcount>
+210
+</playcount>
+</song>
 
+<song>
+<title>
+The Kids Don't Stand a Chance
+</title>
+<artist>
+Vampire Weekend
+</artist>
+<album>
+Vampire Weekend
+</album>
+<playcount>
+1029
+</playcount>
+</song>
 
+<song>
+<title>
+For Emma
+</title>
+<artist>
+Bon Iver
+</artist>
+<album>
+For Emma, Forever Ago
+</album>
+<playcount>
+228
+</playcount>
+</song>
+
+<song>
+<title>
+White Winter Hymnal
+</title>
+<artist>
+Fleet Foxes
+</artist>
+<album>
+Fleet Foxes
+</album>
+<playcount>
+832
+</playcount>
+</song>
+
+<song>
+<title>
+You Got Yr. Cherry Bomb
+</title>
+<artist>
+Spoon
+</artist>
+<album>
+Ga Ga Ga Ga Ga (Bonus Track Version)
+</album>
+<playcount>
+24
+</playcount>
+</song>
+
+<song>
+<title>
+1901
+</title>
+<artist>
+Phoenix
+</artist>
+<album>
+Wolfgang Amadeus Phoenix
+</album>
+<playcount>
+655
+</playcount>
+</song>
+
+<song>
+<title>
+Sweet Disposition
+</title>
+<artist>
+The Temper Trap
+</artist>
+<album>
+Conditions
+</album>
+<playcount>
+1029
+</playcount>
+</song>
+
+<song>
+<title>
+Cheerleader
+</title>
+<artist>
+Grizzly Bear
+</artist>
+<album>
+Veckatimest
+</album>
+<playcount>
+620
+</playcount>
+</song>
+
+<song>
+<title>
+Cheerleader
+</title>
+<artist>
+Grizzly Bear
+</artist>
+<album>
+Veckatimest
+</album>
+<playcount>
+620
+</playcount>
+</song>

@@ -282,13 +282,13 @@ public class SongReader {
             System.out.println(e.getMessage());
         }
         System.out.println();
-        System.out.println("Number of valid Song objects Created: "+songCollection.size());
+//        System.out.println("Number of valid Song objects Created: "+songCollection.size());
         System.out.println();
-        // Outputs correctly parsed Song objects
-        for(Song a : songCollection){
-            System.out.println(a.toString());
-            System.out.println();
-        }
+//        // Outputs correctly parsed Song objects
+//        for(Song a : songCollection){
+//            System.out.println(a.toString());
+//            System.out.println();
+//        }
 
 
         return tagStack.isEmpty();
@@ -299,6 +299,10 @@ public class SongReader {
             songs[i] = songCollection.get(i);
         }
         return songs;
+    }
+
+    public static ArrayList<MySong> toArrlst(){
+        return songCollection;
     }
 }
 /**

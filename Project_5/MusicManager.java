@@ -1,53 +1,85 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 public class MusicManager {
     public static void main(String [] args){
         SongReader reader = new SongReader();
-        int index = 0;
-
-        reader.parseSongData("playlist(1).data");
+        reader.parseSongData(args[0]);
         MySong[] arr = reader.toArray();
         int[] n = new int[reader.toArray().length];
-        ArrayList <MySong> m = new ArrayList<>();
+        ArrayList <Integer> me = new ArrayList<>();
         ArrayList<String> top10Songs = new ArrayList<>();
         ArrayList<String> albums = new ArrayList<>();
-        for(int i = 0;i<n.length;i++){
-            n[i] =arr[i].getPlayCount();
-        }
-        Arrays.sort(n);
-        int index2 = n.length;
-            for (int i = 0; i < n.length ; i++) {
-                for (int j = 0; j <arr.length ; j++) {
-                    if (arr[j].getPlayCount() == n[i]) {
-                        top10Songs.add(arr[j].getTitle()+"  ("+ n[i]+" time(s))");
-                        index2--;
-                    }
+        if(args[1].equalsIgnoreCase("1")) {
+            for (int i = 0; i < n.length; i++) {
+                me.add(arr[i].getPlayCount());
+            }
+            Arrays.sort(n);
+            int index = n.length;
+            int j = 0;
 
+            boolean p = false;
+            for (int i = 0; i < arr.length; i++) {
+
+                if (arr[i].getPlayCount() == me.get(i)) {
+                    top10Songs.add(me.get(i) + " " + arr[i].getTitle());
+                    index--;
+                    j++;
                 }
-                index++;
 
             }
+
+            Collections.sort(top10Songs, new Comparator<String>() {
+                public int compare(String playCount, String title) {
+                    return parseData(playCount) - parseData(title);
+                }
+
+                private int parseData(String str) {
+                    return Integer.parseInt(str.split(" ")[0]);
+                }
+            });
+
             Collections.reverse(top10Songs);
             int counter = 1;
-            for(String a : top10Songs){
-                if(counter!=11) {
-                    System.out.println("#"+counter+". "+a);
+            for (String a : top10Songs) {
+                if (counter != 11) {
+                    System.out.println("#" + counter + ". " + a);
                     counter++;
                 }
             }
-        System.out.println();
-        System.out.println();
-        String artist = "The Weeknd";
-        Arrays.sort(arr);
-        for(Song a : arr){
-
-            if(a.getArtist().equalsIgnoreCase(artist)){
-                System.out.println(a.getTitle());
-            }
         }
+
+
+         if(args[1].equalsIgnoreCase("2")) {
+             Arrays.sort(arr);
+             int msg = 0;
+             int index = 1;
+             boolean found = false;
+             for (Song a : arr) {
+
+                 if (a.getArtist().equalsIgnoreCase(args[2].replaceAll("\"",""))) {
+                     if(msg==0){
+                         System.out.println("The artist, "+ args[2]+", is in the playlist!");
+                         System.out.println("--------------------------------------");
+                         System.out.println("Songs by the artist");
+                         System.out.println();
+                         msg = -1;
+                     }
+                     System.out.println(index+". "+a.getTitle());
+                     found = true;
+                     index++;
+                 }
+             }
+             System.out.println();
+
+
+             if(!found){
+                 System.out.println("Artist isn't on this list");
+             }
+         }
 
 
 

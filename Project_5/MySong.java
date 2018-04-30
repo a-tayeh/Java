@@ -1,8 +1,15 @@
+/**
+ *          Ali Tayeh               Project_5          CMSC-256-001        Spring-2018
+ *
+ *  MySong class is a subclass of Song that adds a new instance variable PlayCount that will be used to read playCount tags
+ *  from our input file
+ */
 public class MySong extends Song{
     private int playCount;
     private Object obj;
 
     public MySong(int playCount) {
+        
         this.playCount = playCount;
     }
 

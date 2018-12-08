@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-
+@SuppressWarnings("unchecked")
 public class cmsc401{
     private static int [][] r;
     private static ArrayList<Integer> costArr = new ArrayList<>();
